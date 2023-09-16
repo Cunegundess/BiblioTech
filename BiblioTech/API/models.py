@@ -4,7 +4,6 @@ class Autor(models.Model):
     nome = models.CharField(max_length=100)
     nacionalidade = models.CharField(max_length=50, blank=True, null=True)
     data_nascimento = models.DateField(blank=True, null=True)
-    data_falecimento = models.DateField(blank=True, null=True)
 
     def __str__(self):
         return self.nome
@@ -40,10 +39,16 @@ class Usuario(models.Model):
     senha = models.CharField(max_length=100)
     contato = models.CharField(max_length=100)
     data_cadastro = models.DateTimeField(auto_now_add=True)
-    is_funcionario = models.BooleanField(default=False)
+    professor = models.BooleanField(default=False)
+    aluno = models.BooleanField(default=False)
 
     def __str__(self):
         return self.nome
+
+class Curso(models.Model):
+    nome = models.CharField(max_length=100)
+    setor = models.CharField(max_length=100)
+    semestres = models.PositiveIntegerField()
 
 class Emprestimo(models.Model):
     livro = models.ForeignKey(Livro, on_delete=models.CASCADE)
