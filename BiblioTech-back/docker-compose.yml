@@ -1,0 +1,31 @@
+version: '3'
+
+services:
+
+  BiblioTechDB:
+    image: postgres:latest
+    container_name: BiblioTechDB
+    environment:
+      - POSTGRES_DB=BiblioTechDB
+      - POSTGRES_USER=myuser
+      - POSTGRES_PASSWORD=mypassword
+    volumes:
+      - postgres_bibliotechdb_data:/var/lib/postgresql/data
+  
+  bibliotech-back:
+    container_name: BiblioTech-Back 
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: bash -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - BiblioTechDB
+    env_file:
+      - .env
+
+volumes:
+  postgres_bibliotechdb_data:
