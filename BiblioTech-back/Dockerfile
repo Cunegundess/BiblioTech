@@ -8,16 +8,6 @@ ENV PYTHONUNBUFFERED 1
 # Cria o diretório de trabalho
 WORKDIR /app
 
-# Verifica o sistema base para instalação do cliente PostgreSQL
-RUN if [ -x "$(command -v pacman)" ]; then \
-        pacman -Sy --noconfirm postgresql && \
-        rm -rf /var/cache/pacman/pkg/* ; \
-    elif [ -x "$(command -v apt-get)" ]; then \
-        apt-get update && \
-        apt-get install -y --no-install-recommends postgresql postgresql-contrib && \
-        rm -rf /var/lib/apt/lists/* ; \
-    fi
-
 # Copia os arquivos de dependências do projeto
 COPY requirements.txt /app/
 
@@ -26,6 +16,10 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 # Copia o código do projeto para o contêiner
 COPY . /app/
+
+# Verifica o sistema base para instalação do cliente PostgreSQL
+RUN chmod a+x ./package_manage.sh
+RUN /app/install_postgresql.sh
 
 # Expõe a porta do servidor Django
 EXPOSE 8000
