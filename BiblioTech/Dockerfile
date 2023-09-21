@@ -18,7 +18,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . /app/
 
 # Verifica o sistema base para instalação do cliente PostgreSQL
-RUN chmod a+x ./package_manage.sh
+RUN chmod a+x ./install_postgresql.sh
 RUN /app/install_postgresql.sh
 
 # Expõe a porta do servidor Django

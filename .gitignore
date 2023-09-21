@@ -1,27 +1,4 @@
 # Backend
 venv/
-.env
+BiblioTech/.env
 BiblioTech/db.lite3
-
-# Frontend
-# dependencies
-BiblioTech-front/node_modules
-BiblioTech-front/.pnp
-BiblioTech-front/.pnp.js
-
-# testing
-BiblioTech-front/coverage
-
-# production
-BiblioTech-front/build
-
-# misc
-BiblioTech-front/.DS_Store
-BiblioTech-front/.env.local
-BiblioTech-front/.env.development.local
-BiblioTech-front/.env.test.local
-BiblioTech-front/.env.production.local
-
-BiblioTech-front/npm-debug.log*
-BiblioTech-front/yarn-debug.log*
-BiblioTech-front/yarn-error.log*
