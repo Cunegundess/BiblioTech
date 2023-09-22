@@ -3,5 +3,7 @@ djangorestframework
 python-dotenv
 markdown
 django-filter
-psycopg
-psycopg2
+# psycopg
+# psycopg2
+django-bootstrap-v5
+django-crispy-forms
