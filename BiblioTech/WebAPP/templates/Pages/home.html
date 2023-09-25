@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="row flex-nowrap">
+            <div class="col-auto bg-light">
+                {% include '../Components/sideNav.html' %}
+            </div>
+
+            <div class="col px-0">
+                {% include '../Components/topNav.html' %}
+
+                <div class="container mt-4">
+                    <div class="row">
+                        <div class="col">
+                            {% block inner_content %}
+                            <p>sfsdf</p>
+                            {% endblock inner_content %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

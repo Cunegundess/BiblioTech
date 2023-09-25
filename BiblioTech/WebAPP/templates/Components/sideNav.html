@@ -1,0 +1,40 @@
+<div class="container-fluid">
+    <div class="row flex-nowrap">
+        <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-light">
+            <div class="d-flex flex-column align-items-center align-items-sm-start px-1 pt-2 text-white min-vh-100">
+                <a href="/" class="d-flex align-items-center pb-4 mb-md-0 me-md-auto text-white text-decoration-none">
+                    <span class="fs-5 d-none d-sm-inline fw-bolder text-primary">BIBLIOTECH</span>
+                </a>
+                <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
+                    <li class="nav-item">
+                        <a href="/home" class="nav-link align-middle text-primary">
+                            <i class="fs-4 bi-house"></i><span class="ms-1 d-none d-sm-inline">Home</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="nav-link align-middle text-secondary">
+                            <i class="fs-4 bi-book"></i><span class="ms-1 d-none d-sm-inline">Livros</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#submenu2" data-bs-toggle="collapse" class="nav-link align-middle text-secondary">
+                            <i class="fs-4 bi-person-badge"></i><span class="ms-1 d-none d-sm-inline">Autores</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#submenu2" data-bs-toggle="collapse" class="nav-link px-4 align-middle text-secondary fixed-bottom py-5">
+                            <i class="fs-4 bi-person-circle"></i><span class="ms-1 d-none d-sm-inline">Minha conta</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="col p-0">
+            
+            {% block inner_content %}
+            {% endblock inner_content %}
+            
+        </div>
+    </div>
+</div>

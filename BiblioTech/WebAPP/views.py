@@ -7,3 +7,12 @@ def bibliotechPage(request):
 
 def loginPage(request):
     return render(request, 'Pages/login.html')
+
+def cadastroPage(request):
+    return render(request, 'Pages/cadastro.html')
+
+def senhaPage(request):
+    return render(request, 'Pages/senha.html')
+
+def homePage(request):
+    return render(request, 'Pages/home.html')
