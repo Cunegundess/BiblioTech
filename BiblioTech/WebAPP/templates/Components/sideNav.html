@@ -1,32 +1,50 @@
 <div class="container-fluid">
     <div class="row flex-nowrap">
         <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-light">
-            <div class="d-flex flex-column align-items-center align-items-sm-start px-1 pt-2 text-white min-vh-100">
+            <div class="d-flex flex-column align-items-center align-items-sm-start pt-2 text-white min-vh-100">
                 <a href="/" class="d-flex align-items-center pb-4 mb-md-0 me-md-auto text-white text-decoration-none">
                     <span class="fs-5 d-none d-sm-inline fw-bolder text-primary">BIBLIOTECH</span>
                 </a>
+
                 <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
                     <li class="nav-item">
-                        <a href="/home" class="nav-link align-middle text-primary">
-                            <i class="fs-4 bi-house"></i><span class="ms-1 d-none d-sm-inline">Home</span>
+                        <a href="/home" class="nav-link align-items-center text-primary d-flex">
+                            <i class="fs-4 bi-house"></i><span class="ms-2 d-none d-sm-inline">Home</span>
                         </a>
                     </li>
-                    <li>
-                        <a href="#" class="nav-link align-middle text-secondary">
-                            <i class="fs-4 bi-book"></i><span class="ms-1 d-none d-sm-inline">Livros</span>
+                    <li class="nav-item">
+                        <a href="/livros" class="nav-link align-items-center text-secondary d-flex">
+                            <i class="fs-4 bi-book"></i><span class="ms-2 d-none d-sm-inline">Livros</span>
                         </a>
                     </li>
-                    <li>
-                        <a href="#submenu2" data-bs-toggle="collapse" class="nav-link align-middle text-secondary">
-                            <i class="fs-4 bi-person-badge"></i><span class="ms-1 d-none d-sm-inline">Autores</span>
+                    <li class="nav-item">
+                        <a href="/autores" data-bs-toggle="collapse" class="nav-link align-items-center text-secondary d-flex">
+                            <i class="fs-4 bi-person-badge"></i><span class="ms-2 d-none d-sm-inline">Autores</span>
                         </a>
                     </li>
-                    <li>
-                        <a href="#submenu2" data-bs-toggle="collapse" class="nav-link px-4 align-middle text-secondary fixed-bottom py-5">
-                            <i class="fs-4 bi-person-circle"></i><span class="ms-1 d-none d-sm-inline">Minha conta</span>
+                    <li class="nav-item">
+                        <a href="/editoras" data-bs-toggle="collapse" class="nav-link align-items-center text-secondary d-flex">
+                            <i class="fs-4 bi-person-badge"></i><span class="ms-2 d-none d-sm-inline">Editoras</span>
                         </a>
                     </li>
                 </ul>
+                
+                
+                <div class="dropdown ms-3 px-4 py-3 fixed-bottom">
+                    <a href="#" class="d-flex align-items-center text-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                        <img src="https://github.com/mdo.png" alt="hugenerd" width="30" height="30" class="rounded-circle">
+                        <span class="d-none d-sm-inline mx-1">loser</span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
+                        <li><a class="dropdown-item" href="#">New project...</a></li>
+                        <li><a class="dropdown-item" href="#">Settings</a></li>
+                        <li><a class="dropdown-item" href="#">Profile</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="#">Sign out</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
 

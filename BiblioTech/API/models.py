@@ -8,7 +8,7 @@ class Autor(models.Model):
     def __str__(self):
         return self.nome
     
-class Publicadora(models.Model):
+class Editora(models.Model):
     nome = models.CharField(max_length=100)
     endereco = models.CharField(max_length=200)
     telefone = models.CharField(max_length=20)
@@ -69,10 +69,10 @@ class Devolucao(models.Model):
 
 class DetalhesLivro(models.Model):
     autor = models.ForeignKey(Autor, on_delete=models.SET_NULL, null=True)
-    publicadora = models.ForeignKey(Publicadora, on_delete=models.SET_NULL, null=True)
+    editora = models.ForeignKey(Editora, on_delete=models.SET_NULL, null=True)
     genero = models.ForeignKey(GeneroLivro, on_delete=models.SET_NULL, null=True)
     unidades = models.PositiveIntegerField()
     emprestimo = models.ForeignKey(Emprestimo, on_delete=models.SET_NULL, null=True)
 
     def __str__(self):
-        return f'{self.autor} - {self.publicadora} - {self.genero}'
+        return f'{self.autor} - {self.Editora} - {self.genero}'

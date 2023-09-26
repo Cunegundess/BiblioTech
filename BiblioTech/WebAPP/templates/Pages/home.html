@@ -8,18 +8,11 @@
                 {% include '../Components/sideNav.html' %}
             </div>
 
-            <div class="col px-0">
-                {% include '../Components/topNav.html' %}
-
-                <div class="container mt-4">
-                    <div class="row">
-                        <div class="col">
-                            {% block inner_content %}
-                            <p>sfsdf</p>
-                            {% endblock inner_content %}
-                        </div>
-                    </div>
-                </div>
+            <div class="col p-4">
+                {% block inner_content %}
+                {% include '../Components/header.html' %}
+                {% include '../Components/card.html' %}
+                {% endblock inner_content %}
             </div>
         </div>
     </div>

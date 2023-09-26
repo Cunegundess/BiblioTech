@@ -16,3 +16,12 @@ def senhaPage(request):
 
 def homePage(request):
     return render(request, 'Pages/home.html')
+
+def livrosPage(request):
+    return render(request, 'Pages/livros.html')
+
+def autoresPage(request):
+    return render(request, 'Pages/autores.html')
+
+def editorasPage(request):
+    return render(request, 'Pages/editoras.html')
