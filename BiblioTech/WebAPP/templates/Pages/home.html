@@ -13,7 +13,21 @@
         <div class="col p-4">
             {% block inner_content %}
                 {% include '../Components/header.html' with titulo="Home" %}
-                {% include '../Components/cards.html' %}
+                {% comment %} <div class="mt-4"> {% endcomment %}
+                    <div class="mt-4 row g-3">
+                        
+                        <div class="col-md-6 d-flex flex-column">
+                            {% include '../Components/cardGreetings.html' %}
+                
+                            {% include '../Components/cardTab.html' %}
+                        </div>
+                
+                        <div class="col-md-6">
+                            {% include '../Components/cardEmprestimo.html' %}
+                        </div>
+                        
+                    </div>
+                {% comment %} </div> {% endcomment %}
             {% endblock inner_content %}
         </div>
     </div>

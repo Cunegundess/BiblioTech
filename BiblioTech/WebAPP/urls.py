@@ -10,8 +10,9 @@ urlpatterns = [
     path('home/conta/', views.minhaContaPage, name='minhaContaPage'),
     path('home/livros/', views.livrosPage, name='livrosPage'),
     path('home/livros/<int:pk>/', views.editarLivro, name='editarLivro'),
+    path('home/livros/emprestimos', views.emprestimosPage, name='emprestimosPage'),
     path('home/autores/', views.autoresPage, name='autoresPage'),
     path('home/autores/<int:pk>/', views.editarAutor, name='editarAutor'),
     path('home/editoras/', views.editorasPage, name='editorasPage'),
-    path('home/editoras/<int:pk>/', views.editarEditora, name='editarEditora'),
+    path('home/editoras/<int:pk>/', views.editarEditora, name='editarEditora')
 ]
