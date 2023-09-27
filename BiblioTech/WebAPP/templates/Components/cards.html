@@ -2,56 +2,13 @@
     <div class="row g-4">
         
         <div class="col-md-6 d-flex flex-column">
-            <div class="card shadow-lg bg-primary mb-4">
-                <div class="card-body">
-                    <h5 class="card-title text-light">Bem vindo, user</h5>
-                    <p class="card-text text-light">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                </div>
-            </div>
+            {% include '../Components/cardGreetings.html' %}
 
-            <div class="card text-center shadow-lg">
-                <div class="card-header">
-                    <ul class="nav nav-pills card-header-pills">
-                        <li class="nav-item">
-                            <a class="nav-link active" href="#">Livros</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Autores</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" aria-disabled="true">Editoras</a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="card-body d-flex flex-column">
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item">An item</li>
-                        <li class="list-group-item">A second item</li>
-                        <li class="list-group-item">A third item</li>
-                      </ul>
-                </div>
-                <div class="card-footer">
-                    <a href="#" class="">Go somewhere</a>
-                </div>
-            </div>
+            {% include '../Components/cardTab.html' %}
         </div>
 
         <div class="col-md-6">
-            <div class="card shadow-lg h-100">
-                <div class="card-header text-center">
-                    <h5 class="card-title">Emprestimos</h5>
-                </div>
-                <div class="card-body text-center">
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item">An item</li>
-                        <li class="list-group-item">A second item</li>
-                        <li class="list-group-item">A third item</li>
-                    </ul>
-                </div>
-                <div class="card-footer text-center">
-                    <a href="#" class="">Go somewhere</a>
-                </div>
-            </div>
+            {% include '../Components/cardEmprestimo.html' %}
         </div>
         
     </div>

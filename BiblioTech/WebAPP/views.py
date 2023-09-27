@@ -29,6 +29,14 @@ def livrosPage(request):
     
     return render(request, 'Pages/livros.html', titulo)
 
+def emprestimosPage(request):
+    # editoras = Editora.objects.all()
+    # context = {'editoras': editoras}
+    titulo = {
+        'page_title': 'Empréstimos'
+    }
+    return render(request, 'Pages/emprestimos.html', titulo)
+
 def autoresPage(request):
     # autores = Autor.objects.all()
     # context = {'autores': autores}
