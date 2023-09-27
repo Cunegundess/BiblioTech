@@ -14,6 +14,9 @@ def cadastroPage(request):
 def senhaPage(request):
     return render(request, 'Pages/senha.html')
 
+def minhaContaPage(request):
+    return render(request, 'Pages/minhaConta.html')
+
 def homePage(request):
     return render(request, 'Pages/home.html')
 
