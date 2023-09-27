@@ -1,5 +1,5 @@
 from django.shortcuts import render
-
+# from BiblioTech.API.models import Livro, Autor, Editora
 
 # Create your views here.
 def bibliotechPage(request):
@@ -18,10 +18,51 @@ def homePage(request):
     return render(request, 'Pages/home.html')
 
 def livrosPage(request):
-    return render(request, 'Pages/livros.html')
+    # livros = Livro.objects.all()
+    # context = {'livros': livros}
+    titulo = {
+        'page_title': 'Livros'
+    }
+    
+    return render(request, 'Pages/livros.html', titulo)
 
 def autoresPage(request):
-    return render(request, 'Pages/autores.html')
+    # autores = Autor.objects.all()
+    # context = {'autores': autores}
+    titulo = {
+        'page_title': 'Autores'
+    }
+    return render(request, 'Pages/autores.html', titulo)
 
 def editorasPage(request):
-    return render(request, 'Pages/editoras.html')
+    # editoras = Editora.objects.all()
+    # context = {'editoras': editoras}
+    titulo = {
+        'page_title': 'Editoras'
+    }
+    return render(request, 'Pages/editoras.html', titulo)
+
+def editarLivro(request, pk):
+    # livros = Livro.objects.all()
+    # context = {'livros': livros}
+    titulo = {
+        'page_title': 'Livros'
+    }
+    
+    return render(request, 'Pages/editarLivro.html', titulo)
+
+def editarAutor(request, pk):
+    # autores = Autor.objects.all()
+    # context = {'autores': autores}
+    titulo = {
+        'page_title': 'Autores'
+    }
+    return render(request, 'Pages/editarAutor.html', titulo)
+
+def editarEditora(request, pk):
+    # editoras = Editora.objects.all()
+    # context = {'editoras': editoras}
+    titulo = {
+        'page_title': 'Editoras'
+    }
+    return render(request, 'Pages/editarEditora.html', titulo)

@@ -2,18 +2,20 @@
 {% load static %}
 
 {% block content %}
-    <div class="container-fluid">
-        <div class="row flex-nowrap">
-            <div class="col-auto bg-light">
-                {% include '../Components/sideNav.html' %}
-            </div>
+<div class="container-fluid">
+    <div class="row">
+        <!-- Sidebar -->
+        <div class="col-auto" style="height: 100%;">
+            {% include '../Components/sideNav.html' %}
+        </div>
 
-            <div class="col p-4">
-                {% block inner_content %}
-                {% include '../Components/header.html' %}
-                {% include '../Components/card.html' %}
-                {% endblock inner_content %}
-            </div>
+        <!-- Conteúdo Principal -->
+        <div class="col p-4">
+            {% block inner_content %}
+                {% include '../Components/header.html' with titulo="Home" %}
+                {% include '../Components/cards.html' %}
+            {% endblock inner_content %}
         </div>
     </div>
+</div>
 {% endblock %}
