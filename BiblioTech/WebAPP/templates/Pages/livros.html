@@ -11,21 +11,20 @@
             <div class="col p-4">
                 {% block inner_content %}
                 {% include '../Components/header.html' with titulo="Livros" %}
-                {% comment %} {% for livro in livros %} {% endcomment %}
-                    <div class="card shadow-lg h-75 mt-5">
-                        <div class="card-header text-center">
-                            {% comment %} <h5 class="card-title">{{ card_title }}</h5> {% endcomment %}
-                        </div>
-                        <div class="card-body text-center">
-                            <ul class="list-group list-group-flush">
+                <div class="card shadow-lg h-75 mt-5">
+                    <div class="card-header text-center">
+                    </div>
+                    <div class="card-body text-center">
+                        <ul class="list-group list-group-flush">
+                            {% for livro in livros %}
                                 <li class="list-group-item">{{ livro.titulo }}</li>
+                            {% endfor %}
                             </ul>
                         </div>
                         <div class="card-footer text-center">
                             <a href="#" class="">Go somewhere</a>
                         </div>
                     </div>
-                    {% comment %} {% endfor %} {% endcomment %}
                 {% endblock inner_content %}
             </div>
         </div>

@@ -1,5 +1,5 @@
 from django.shortcuts import render
-# from BiblioTech.API.models import Livro, Autor, Editora
+from API.models import Livro, Autor, Editora
 
 # Create your views here.
 def bibliotechPage(request):
@@ -21,13 +21,9 @@ def homePage(request):
     return render(request, 'Pages/home.html')
 
 def livrosPage(request):
-    # livros = Livro.objects.all()
-    # context = {'livros': livros}
-    titulo = {
-        'page_title': 'Livros'
-    }
-    
-    return render(request, 'Pages/livros.html', titulo)
+    livros = Livro.objects.all()
+    context = {'livros': livros, 'page_title': 'Livros'}
+    return render(request, 'Pages/livros.html', context)
 
 def emprestimosPage(request):
     # editoras = Editora.objects.all()
