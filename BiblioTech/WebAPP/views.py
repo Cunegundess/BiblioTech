@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from API.models import Livro, Autor, Editora
+from API.models import Livro, Autor, Editora, Emprestimo, Usuario
 
 # Create your views here.
 def bibliotechPage(request):
@@ -17,8 +17,25 @@ def senhaPage(request):
 def minhaContaPage(request):
     return render(request, 'Pages/minhaConta.html')
 
+def alunosPage(request):
+    alunos = Usuario.objects.all()
+    context = {'alunos': alunos}
+    return render(request, 'Pages/alunosPage.html', context)
+
 def homePage(request):
-    return render(request, 'Pages/home.html')
+    livros = Livro.objects.all()
+    editoras = Editora.objects.all()
+    autores = Autor.objects.all()
+    emprestimos = Emprestimo.objects.all()
+    usuarios = Usuario.objects.all()
+    context = {
+        'livros': livros,
+        'editoras': editoras,
+        'autores': autores,
+        'emprestimos': emprestimos,
+        'usuarios': usuarios
+    }
+    return render(request, 'Pages/home.html', context)
 
 def livrosPage(request):
     livros = Livro.objects.all()
@@ -26,28 +43,24 @@ def livrosPage(request):
     return render(request, 'Pages/livros.html', context)
 
 def emprestimosPage(request):
-    # editoras = Editora.objects.all()
-    # context = {'editoras': editoras}
-    titulo = {
-        'page_title': 'Empréstimos'
-    }
-    return render(request, 'Pages/emprestimos.html', titulo)
+    emprestimos = Emprestimo.objects.all()
+    context = {'emprestimos': emprestimos, 'page_title': 'Emprestimos'}
+    return render(request, 'Pages/emprestimos.html', context)
 
 def autoresPage(request):
-    # autores = Autor.objects.all()
-    # context = {'autores': autores}
-    titulo = {
-        'page_title': 'Autores'
-    }
-    return render(request, 'Pages/autores.html', titulo)
+    autores = Autor.objects.all()
+    context = {'autores': autores, 'page_title': 'Autores'}
+    return render(request, 'Pages/autores.html', context)
 
 def editorasPage(request):
-    # editoras = Editora.objects.all()
-    # context = {'editoras': editoras}
-    titulo = {
-        'page_title': 'Editoras'
-    }
-    return render(request, 'Pages/editoras.html', titulo)
+    editoras = Editora.objects.all()
+    context = {'editoras': editoras, 'page_title': 'Editoras'}
+    return render(request, 'Pages/editoras.html', context)
+
+def modalUser(request):
+    usuarios = Usuario.objects.all()
+    context = {'usuarios': usuarios}
+    return render(request, context)
 
 def editarLivro(request, pk):
     # livros = Livro.objects.all()

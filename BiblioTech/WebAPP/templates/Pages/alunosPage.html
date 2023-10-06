@@ -10,15 +10,15 @@
 
             <div class="col p-4">
                 {% block inner_content %}
-                {% include '../Components/header.html' with titulo="Editoras" %}
+                {% include '../Components/header.html' with titulo="Alunos" %}
                 <div class="card shadow-lg h-75 mt-5">
                     <div class="card-header text-center">
                         {% comment %} <h5 class="card-title">{{ card_title }}</h5> {% endcomment %}
                     </div>
                     <div class="card-body text-center">
                         <ul class="list-group list-group-flush">
-                                {% for editora in editoras %}
-                                <li class="list-group-item">{{ editora.nome }}</li>
+                                {% for aluno in alunos %}
+                                <li class="list-group-item">{{ aluno.nome }}</li>
                                 {% endfor %}
                             </ul>
                         </div>
