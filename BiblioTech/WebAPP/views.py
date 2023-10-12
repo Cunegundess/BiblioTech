@@ -1,12 +1,15 @@
 from django.shortcuts import render
-from API.models import Livro, Autor, Editora, Emprestimo, Usuario
+from API.models import Livro, Autor, Editora, Emprestimo, Aluno
+# from django.contrib.auth.forms import UserCreationForm
+from WebAPP.forms import *
 
 # Create your views here.
 def bibliotechPage(request):
     return render(request, 'Pages/initial.html')
 
 def loginPage(request):
-    return render(request, 'Pages/login.html')
+    context = {'form': adminLogin}
+    return render(request, 'Pages/login.html', context)
 
 def cadastroPage(request):
     return render(request, 'Pages/cadastro.html')
@@ -14,32 +17,32 @@ def cadastroPage(request):
 def senhaPage(request):
     return render(request, 'Pages/senha.html')
 
-def minhaContaPage(request):
-    return render(request, 'Pages/minhaConta.html')
 
 def alunosPage(request):
-    alunos = Usuario.objects.all()
-    context = {'alunos': alunos}
+    alunos = Aluno.objects.all()
+    emprestimos = Emprestimo.objects.all()
+    context = {'alunos': alunos, 'emprestimos': emprestimos, 'form': AlunoForm}
     return render(request, 'Pages/alunosPage.html', context)
 
 def homePage(request):
-    livros = Livro.objects.all()
-    editoras = Editora.objects.all()
-    autores = Autor.objects.all()
-    emprestimos = Emprestimo.objects.all()
-    usuarios = Usuario.objects.all()
+    livros = Livro.objects.all()[:5]
+    editoras = Editora.objects.all()[:5]
+    autores = Autor.objects.all()[:5]
+    emprestimos = Emprestimo.objects.all()[:5]
+    alunos = Aluno.objects.all()[:5]
     context = {
         'livros': livros,
         'editoras': editoras,
         'autores': autores,
         'emprestimos': emprestimos,
-        'usuarios': usuarios
+        'alunos': alunos
     }
     return render(request, 'Pages/home.html', context)
 
 def livrosPage(request):
     livros = Livro.objects.all()
-    context = {'livros': livros, 'page_title': 'Livros'}
+    emprestimos = Emprestimo.objects.all()
+    context = {'livros': livros, 'emprestimos': emprestimos, 'page_title': 'Livros'}
     return render(request, 'Pages/livros.html', context)
 
 def emprestimosPage(request):
@@ -58,8 +61,8 @@ def editorasPage(request):
     return render(request, 'Pages/editoras.html', context)
 
 def modalUser(request):
-    usuarios = Usuario.objects.all()
-    context = {'usuarios': usuarios}
+    Alunos = Aluno.objects.all()
+    context = {'Alunos': Alunos}
     return render(request, context)
 
 def editarLivro(request, pk):

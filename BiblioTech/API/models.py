@@ -32,32 +32,31 @@ class GeneroLivro(models.Model):
     def __str__(self):
         return self.nome
 
-
-class Usuario(models.Model):
-    nome = models.CharField(max_length=100)
-    email = models.EmailField(unique=True)
-    senha = models.CharField(max_length=100)
-    contato = models.CharField(max_length=100)
-    data_cadastro = models.DateTimeField(auto_now_add=True)
-    professor = models.BooleanField(default=False)
-    aluno = models.BooleanField(default=False)
-
-    def __str__(self):
-        return self.nome
-
 class Curso(models.Model):
     nome = models.CharField(max_length=100)
     setor = models.CharField(max_length=100)
     semestres = models.PositiveIntegerField()
 
+class Aluno(models.Model):
+    nome = models.CharField(max_length=100)
+    email = models.EmailField(unique=True)
+    senha = models.CharField(max_length=100)
+    contato = models.CharField(max_length=100)
+    ra = models.CharField(max_length=100, unique=True) 
+    data_cadastro = models.DateTimeField(auto_now_add=True)
+    curso = models.ForeignKey(Curso, on_delete=models.CASCADE, default=None)
+
+    def __str__(self):
+        return self.nome
+
 class Emprestimo(models.Model):
     livro = models.ForeignKey(Livro, on_delete=models.CASCADE)
-    usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
+    aluno = models.ForeignKey(Aluno, on_delete=models.CASCADE)
     data_emprestimo = models.DateField(auto_now_add=True)
     data_devolucao = models.DateField()
 
     def __str__(self):
-        return f'{self.livro} emprestado por {self.usuario}'
+        return f'{self.livro} emprestado por {self.aluno}'
 
 class Devolucao(models.Model):
     emprestimo = models.OneToOneField(Emprestimo, on_delete=models.CASCADE)

@@ -12,18 +12,13 @@
                 {% block inner_content %}
                 {% include '../Components/header.html' with titulo="Editoras" %}
                 <div class="card shadow-lg h-75 mt-5">
-                    <div class="card-header text-center">
-                        {% comment %} <h5 class="card-title">{{ card_title }}</h5> {% endcomment %}
+                    <div class="card-header text-end">
+                        <button type="button" class="btn btn-sm bg-primary text-light">
+                            <i class="bi bi-person-plus-fill"></i>
+                        </button>
                     </div>
                     <div class="card-body text-center">
-                        <ul class="list-group list-group-flush">
-                                {% for editora in editoras %}
-                                <li class="list-group-item">{{ editora.nome }}</li>
-                                {% endfor %}
-                            </ul>
-                        </div>
-                        <div class="card-footer text-center">
-                            <a href="#" class="">Ver mais</a>
+                        {% include '../Components/tableEditora.html' %}
                         </div>
                     </div>
                 {% endblock inner_content %}

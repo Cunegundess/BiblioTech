@@ -12,17 +12,13 @@
                 {% block inner_content %}
                 {% include '../Components/header.html' with titulo="Livros" %}
                 <div class="card shadow-lg h-75 mt-5">
-                    <div class="card-header text-center">
+                    <div class="card-header text-end">
+                        <button type="button" class="btn btn-sm bg-primary text-light">
+                            <i class="bi bi-person-plus-fill"></i>
+                        </button>
                     </div>
                     <div class="card-body text-center">
-                        <ul class="list-group list-group-flush">
-                            {% for livro in livros %}
-                                <li class="list-group-item">{{ livro.titulo }}</li>
-                            {% endfor %}
-                            </ul>
-                        </div>
-                        <div class="card-footer text-center">
-                            <a href="#" class="">Ver mais</a>
+                        {% include '../Components/tableLivros.html' %}
                         </div>
                     </div>
                 {% endblock inner_content %}

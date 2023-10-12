@@ -1,0 +1,24 @@
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th scope="col">Nome</th>
+            <th scope="col">Nacionalidade</th>
+            <th scope="col">Nascimento</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for autor in autores %}
+        <tr>
+            <td>{{ autor.nome }}</td>
+            <td>{{ autor.nacionalidade }}</td>
+            <td>{{ autor.data_nascimento }}</td>
+            <td>
+                <button type="button" class="btn btn-sm bg-primary text-light">
+                    <i class="bi bi-pencil-square me-1"></i>
+                    Editar
+                </button>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>

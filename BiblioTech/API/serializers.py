@@ -21,9 +21,9 @@ class GeneroLivroSerializer(serializers.ModelSerializer):
         model = GeneroLivro
         fields = '__all__'
 
-class UsuarioSerializer(serializers.ModelSerializer):
+class AlunoSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Usuario
+        model = Aluno
         fields = '__all__'
 
 class EmprestimoSerializer(serializers.ModelSerializer):
@@ -40,3 +40,9 @@ class DetalhesLivroSerializer(serializers.ModelSerializer):
     class Meta:
         model = DetalhesLivro
         fields = '__all__'
+
+class CursoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Curso
+        fields = '__all__'
+

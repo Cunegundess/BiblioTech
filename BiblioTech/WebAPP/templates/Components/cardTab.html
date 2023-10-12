@@ -1,41 +1,28 @@
-<div class="card text-center shadow-lg">
+<div class="card text-center shadow-lg mb-4">
     <div class="card-header">
         <ul class="nav nav-pills nav-fill mb-3" id="pills-tab" role="tablist">
             <li class="nav-item" role="presentation">
-              <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Livros</button>
+                <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-livro" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Livros</button>
             </li>
             <li class="nav-item" role="presentation">
-              <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Autores</button>
+                <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-autor" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Autores</button>
             </li>
             <li class="nav-item" role="presentation">
-              <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Editoras</button>
+                <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-editora" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Editoras</button>
             </li>
-          </ul> 
+        </ul>
     </div>
     <div class="card-body d-flex flex-column tab-content" id="pills-tabContent">
-        <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab" tabindex="0">
-            <ul class="list-group list-group-flush">
-                {% for livro in livros %}
-                    <li class="list-group-item">{{ livro.titulo }}</li>
-                {% endfor %}
-            </ul>
+        <div class="tab-pane fade show active" id="pills-livro" role="tabpanel" aria-labelledby="pills-home-tab" tabindex="0">
+            {% include '../Components/tableLivros.html' %}
         </div>
-        <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab" tabindex="0">
-            <ul class="list-group list-group-flush">
-                {% for autor in autores %}
-                    <li class="list-group-item">{{ autor.nome }}</li>
-                {% endfor %}
-            </ul>
+        <div class="tab-pane fade" id="pills-autor" role="tabpanel" aria-labelledby="pills-profile-tab" tabindex="0">
+            {% include '../Components/tableAutor.html' %}
         </div>
-        <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab" tabindex="0">
-            <ul class="list-group list-group-flush">
-                {% for editora in editoras %}
-                <li class="list-group-item">{{ editora.nome }}</li>
-                {% endfor %}
-            </ul>
-        </div>     
+        <div class="tab-pane fade" id="pills-editora" role="tabpanel" aria-labelledby="pills-contact-tab" tabindex="0">
+            {% include '../Components/tableEditora.html' %}
+        </div>
     </div>
     <div class="card-footer">
-        <a href="#" class="">Ver mais</a>
     </div>
 </div>

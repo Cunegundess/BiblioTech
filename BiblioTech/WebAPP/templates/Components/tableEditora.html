@@ -1,0 +1,24 @@
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th scope="col">Nome</th>
+            <th scope="col">Endereço</th>
+            <th scope="col">Contato</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for editora in editoras %}
+        <tr>
+            <td>{{ editora.nome }}</td>
+            <td>{{ editora.endereco }}</td>
+            <td>{{ editora.telefone }}</td>
+            <td>
+                <button type="button" class="btn btn-sm bg-primary text-light">
+                    <i class="bi bi-pencil-square me-1"></i>
+                    Editar
+                </button>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>

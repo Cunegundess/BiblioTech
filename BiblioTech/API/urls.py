@@ -20,8 +20,8 @@ urlpatterns = [
     path('generolivro/<int:pk>/', GeneroLivroView.as_view(), name='generolivro-detail'),
 
     # Usuario
-    path('usuarios/', UsuariosView.as_view(), name='usuarios'),
-    path('usuario/<int:pk>/', UsuarioView.as_view(), name='usuario'),
+    path('alunos/', AlunosView.as_view(), name='alunos'),
+    path('aluno/<int:pk>/', AlunoView.as_view(), name='aluno'),
 
     # Emprestimo
     path('emprestimos/', EmprestimosView.as_view(), name='emprestimo-list'),
@@ -34,4 +34,8 @@ urlpatterns = [
     # DetalhesLivro
     path('detalheslivros/', DetalhesLivrosView.as_view(), name='detalheslivro-list'),
     path('detalheslivro/<int:pk>/', DetalhesLivrosView.as_view(), name='detalheslivro-detail'),
+
+    # Curso
+    path('cursos/', CursosView.as_view(), name='cursos-list'),
+    path('curso/<int:pk>/', CursoView.as_view(), name='curso-detail'),
 ]

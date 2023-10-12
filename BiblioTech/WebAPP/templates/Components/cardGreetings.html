@@ -1,13 +1,9 @@
-<div class="card shadow-lg mb-4">
+<div class="card shadow-lg">
     <div class="card-header text-center">
-        <h5 class="card-title">Alunos Cadastrados</h5>
+        <h5 class="card-title">Alunos</h5>
     </div>
     <div class="card-body">
-        <ul class="list-group list-group-flush">
-            {% for usuario in usuarios %}
-            <li class="list-group-item">{{ usuario.nome }}</li>
-            {% endfor %}
-        </ul>
+        {% include '../Components/tableAluno.html' %}
     </div>
     <div class="card-footer text-center">
         <a href="{% url 'alunosPage' %}">Ver mais</a>

@@ -15,20 +15,22 @@ def routesList(request):
     'livro/<int:pk>/',
     'generolivros/',
     'generolivro/<int:pk>/',
-    'usuarios/',
-    'usuario/<int:pk>/',
+    'alunos/',
+    'aluno/<int:pk>/',
     'emprestimos/',
     'emprestimo/<int:pk>/',
     'devolucoes/',
     'devolucao/<int:pk>/',
     'detalheslivros/',
     'detalheslivro/<int:pk>/',
+    'cursos/',
+    'curso/<int:pk>/',
     ]
 
     return render(request, 'routes.html', {'routes': routes})
-class UsuariosView(APIView):
-    queryset = Usuario.objects.all()
-    serializer_class = UsuarioSerializer
+class AlunosView(APIView):
+    queryset = Aluno.objects.all()
+    serializer_class = AlunoSerializer
 
     def get(self, request):
         serializer = self.serializer_class(self.queryset.all(), many=True)
@@ -43,35 +45,35 @@ class UsuariosView(APIView):
     
     def put(self, request, pk):
         try:
-            usuario = self.queryset.get(pk=pk)
-        except Usuario.DoesNotExist:
+            aluno = self.queryset.get(pk=pk)
+        except aluno.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
 
-        serializer = self.serializer_class(usuario, data=request.data)
+        serializer = self.serializer_class(aluno, data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)    
-class UsuarioView(APIView):
-    serializer_class = UsuarioSerializer
+class AlunoView(APIView):
+    serializer_class = AlunoSerializer
 
     def get_object(self, pk):
         try:
-            return Usuario.objects.get(pk=pk)
-        except Usuario.DoesNotExist:
+            return Aluno.objects.get(pk=pk)
+        except Aluno.DoesNotExist:
             return None
 
     def get(self, request, pk):
-        usuario = self.get_object(pk)
-        if usuario is not None:
-            serializer = self.serializer_class(usuario)
+        aluno = self.get_object(pk)
+        if aluno is not None:
+            serializer = self.serializer_class(aluno)
             return Response(serializer.data)
         return Response(status=status.HTTP_404_NOT_FOUND)
 
     def put(self, request, pk):
-        usuario = self.get_object(pk)
-        if usuario is not None:
-            serializer = self.serializer_class(usuario, data=request.data)
+        aluno = self.get_object(pk)
+        if aluno is not None:
+            serializer = self.serializer_class(aluno, data=request.data)
             if serializer.is_valid():
                 serializer.save()
                 return Response(serializer.data)
@@ -79,9 +81,9 @@ class UsuarioView(APIView):
         return Response(status=status.HTTP_404_NOT_FOUND)
 
     def delete(self, request, pk):
-        usuario = self.get_object(pk)
-        if usuario is not None:
-            usuario.delete()
+        aluno = self.get_object(pk)
+        if aluno is not None:
+            aluno.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
         return Response(status=status.HTTP_404_NOT_FOUND)
 class AutoresView(APIView):
@@ -102,7 +104,7 @@ class AutoresView(APIView):
     def put(self, request, pk):
         try:
             autor = self.queryset.get(pk=pk)
-        except Usuario.DoesNotExist:
+        except Aluno.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
 
         serializer = self.serializer_class(autor, data=request.data)
@@ -286,7 +288,7 @@ class EmprestimosView(APIView):
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)    
 class EmprestimoView(APIView):
-    serializer_class = UsuarioSerializer
+    serializer_class = AlunoSerializer
 
     def get_object(self, pk):
         try:
@@ -394,14 +396,16 @@ class DetalhesLivrosView(APIView):
     def put(self, request, pk):
         try:
             detalhes = self.queryset.get(pk=pk)
-        except Usuario.DoesNotExist:
+        except Aluno.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
 
         serializer = self.serializer_class(detalhes, data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)    
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)  
+
+
 class DetalhesLivroView(APIView):
     serializer_class = DetalhesLivroSerializer
 
@@ -434,6 +438,8 @@ class DetalhesLivroView(APIView):
             detalhes.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
         return Response(status=status.HTTP_404_NOT_FOUND)
+    
+
 class GeneroLivrosView(APIView):
     queryset = GeneroLivro.objects.all()
     serializer_class = GeneroLivroSerializer
@@ -452,14 +458,16 @@ class GeneroLivrosView(APIView):
     def put(self, request, pk):
         try:
             genero = self.queryset.get(pk=pk)
-        except Usuario.DoesNotExist:
+        except Aluno.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
 
         serializer = self.serializer_class(genero, data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)    
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
 class GeneroLivroView(APIView):
     serializer_class = DetalhesLivroSerializer
 
@@ -490,5 +498,67 @@ class GeneroLivroView(APIView):
         genero = self.get_object(pk)
         if genero is not None:
             genero.delete()
+            return Response(status=status.HTTP_204_NO_CONTENT)
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    
+
+class CursosView(APIView):
+    queryset = Curso.objects.all()
+    serializer_class = CursoSerializer
+
+    def get(self, request):
+        serializer = self.serializer_class(self.queryset.all(), many=True)
+        return Response(serializer.data)
+    
+    def post(self, request):
+        serializer = self.serializer_class(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+    def put(self, request, pk):
+        try:
+            curso = self.queryset.get(pk=pk)
+        except Aluno.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+
+        serializer = self.serializer_class(curso, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class CursoView(APIView):
+    serializer_class = CursoSerializer
+
+    def get_object(self, pk):
+        try:
+            return CursoSerializer.objects.get(pk=pk)
+        except CursoSerializer.DoesNotExist:
+            return None
+
+    def get(self, request, pk):
+        curso = self.get_object(pk)
+        if curso is not None:
+            serializer = self.serializer_class(curso)
+            return Response(serializer.data)
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    def put(self, request, pk):
+        curso = self.get_object(pk)
+        if curso is not None:
+            serializer = self.serializer_class(curso, data=request.data)
+            if serializer.is_valid():
+                serializer.save()
+                return Response(serializer.data)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    def delete(self, request, pk):
+        curso = self.get_object(pk)
+        if curso is not None:
+            curso.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
         return Response(status=status.HTTP_404_NOT_FOUND)
