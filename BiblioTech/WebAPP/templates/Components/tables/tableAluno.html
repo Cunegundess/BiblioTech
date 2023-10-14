@@ -3,7 +3,7 @@
         <tr>
             <th scope="col">Nome</th>
             <th scope="col">RA</th>
-            <th scope="col">Empréstimo</th>
+            <th scope="col">Curso</th>
         </tr>
     </thead>
     <tbody>
@@ -12,9 +12,17 @@
             <td>{{ aluno.nome }}</td>
             <td>{{ aluno.ra }}</td>
             
-            {% for emprestimo in emprestimos %}
-            <td>{{ emprestimo.livro }}</td>
-            {% endfor %}
+
+            <td> {{ aluno.curso.nome }}
+            {% comment %} {% if aluno.emprestimos.exists %}
+                {% for emprestimo in aluno.emprestimos.all %}
+                    {{ emprestimo.livro }}
+                {% endfor %}
+                {% else %}
+                    Nenhum empréstimo
+                {% endif %} {% endcomment %}
+            </td>
+
             <td>
                 <button type="button" class="btn btn-sm bg-primary text-light">
                     <i class="bi bi-pencil-square me-1"></i>

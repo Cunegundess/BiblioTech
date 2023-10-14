@@ -13,13 +13,13 @@
                 {% include '../Components/header.html' with titulo="Alunos" %}
                 <div class="card shadow-lg h-75 mt-5">
                     <div class="card-header text-end">
-                    <button type="button" class="btn btn-sm bg-primary text-light" data-bs-toggle="modal" data-bs-target="#alunocadastro">
+                    <button type="button" class="btn btn-sm bg-primary text-light" data-bs-toggle="modal" data-bs-target="#formAluno">
                             <i class="bi bi-person-plus-fill"></i>
                     </button>
-                    {% include '../Components/modalCadastroAluno.html' %}
+                    {% include '../Components/forms/formAluno.html' %}
                     </div>
                     <div class="card-body text-center">
-                        {% include '../Components/tableAluno.html' with titulo="Alunos" %}
+                        {% include '../Components/tables/tableAluno.html' with titulo="Alunos" %}
                     </div>
                 </div>
                 {% endblock inner_content %}

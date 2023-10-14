@@ -1,0 +1,28 @@
+{% load crispy_forms_tags %}
+
+
+<div class="modal fade" id="formLivro" tabindex="-1" aria-labelledby="formLivro" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="formLivroLabel">Cadastrar Livro</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+        <div class="modal-body text-start">
+        <form id="LivroForm" method="POST" action="{% url 'API:livros'%}">
+            {% csrf_token %}
+            {% crispy form form.helper %}
+        </div>
+        <div class="modal-footer">
+            <button form="LivroForm" type="submit" class="btn btn-primary">Salvar</button>
+        </div>
+        </form>
+    </div>
+  </div>
+</div>
+
+<style>
+    .asteriskField {
+        display: none;
+    }            
+</style>

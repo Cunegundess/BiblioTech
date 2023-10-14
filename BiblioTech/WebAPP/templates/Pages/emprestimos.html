@@ -13,12 +13,13 @@
                 {% include '../Components/header.html' with titulo="Empréstimos" %}
                 <div class="card shadow-lg h-75 mt-5">
                     <div class="card-header text-end">
-                    <button type="button" class="btn btn-sm bg-primary text-light">
+                    <button type="button" class="btn btn-sm bg-primary text-light" data-bs-toggle="modal" data-bs-target="#formEmprestimo">
                             <i class="bi bi-person-plus-fill"></i>
                         </button>
+                        {% include '../Components/forms/formEmprestimo.html' %}
                     </div>
                     <div class="card-body text-center">
-                        {% include '../Components/tableEmprestimo.html' %}
+                        {% include '../Components/tables/tableEmprestimo.html' %}
                         </div>
                     </div>
                 {% endblock inner_content %}

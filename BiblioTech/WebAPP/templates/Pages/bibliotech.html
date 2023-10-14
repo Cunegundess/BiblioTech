@@ -1,22 +1,29 @@
 {% extends "base.html" %}
 {% load static %}
 
-<html>
-    <body>    
-    {% block content %}
-        
-    {% include '../Components/indexNavbar.html' %}
-    
-    <div class="container-fluid p-0">
-        <div class="position-relative">
-            <img src="{% static 'img/book3.png' %}" class="img-fluid w-100" alt="Index Image">
-            <div class="position-absolute top-50 start-50 translate-middle text-center w-100">
-                <h1 class="text-start ms-5 fw-bold display-4">Onde cada página</h1>
-                <h1 class="text-end me-5 fw-bold display-4" style="top: 10%;">é uma <span class="text-uppercase">aventura!<span/></h1>
-            </div> 
+{% block content %}
+
+{% include '../Components/navbar.html' %}
+
+<!-- Header-->
+<header class="py-5" style="background-image: url('{% static 'img/books6.jpg' %}'); background-size: 100%; background-position: center; height: 100vh;">
+    <div class="container px-5 pb-5 h-100">
+        <div class="row gx-5 align-items-center h-100">
+            <div class="col-xxl-5">
+                <!-- Header text content-->
+                <div class="text-center text-xxl-start">
+                    <div class="fs-3 fw-regular">Onde cada página</div>
+                    <h1 class="display-3 fw-bolder mb-5"><span class="text-gradient d-inline">É uma AVENTURA!</span></h1>
+                    <div class="d-grid d-sm-flex justify-content-sm-center justify-content-xxl-start mb-3">
+                        <a class="btn btn-primary btn-lg px-5 py-3 me-sm-3 fs-6 fw-bolder shadow-lg" href="/login">Entrar</a>
+                        <a class="btn btn-outline-dark btn-lg px-5 py-3 fs-6 fw-bolder shadow-lg" href="/cadastro">Cadastrar</a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+</header>
 
-    {% endblock %}
-    </body>
-</html>
+{% include '../Components/footer.html' %}
+
+{% endblock %}

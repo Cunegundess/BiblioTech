@@ -1,4 +1,4 @@
-<div class="row flex-nowrap">
+<div class="row flex-nowrap sideNav">
     <div class="px-sm-2 bg-light">
         <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
             <a href="/" class="d-flex align-items-center pb-4 mb-md-0 me-md-auto text-white text-decoration-none">
@@ -38,7 +38,7 @@
                 </li>
             </ul>
             
-            {% include '../Components/modalUsuario.html' %}
+            {% include '../Components/modals/modalConta.html' %}
         </div>
     </div>
 
@@ -51,12 +51,12 @@
 </div>
 
 <style>
-    .nav-link.active {
+    .sideNav .nav-link.active {
         background-color: unset !important;
     }
 
-    .nav-link.active i,
-    .nav-link.active span {
+    .sideNav .nav-link.active i,
+    .sideNav .nav-link.active span {
         color: #007bff !important;
     }
 </style>

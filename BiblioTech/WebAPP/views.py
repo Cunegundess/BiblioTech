@@ -5,7 +5,7 @@ from WebAPP.forms import *
 
 # Create your views here.
 def bibliotechPage(request):
-    return render(request, 'Pages/initial.html')
+    return render(request, 'Pages/bibliotech.html')
 
 def loginPage(request):
     context = {'form': adminLogin}
@@ -22,7 +22,7 @@ def alunosPage(request):
     alunos = Aluno.objects.all()
     emprestimos = Emprestimo.objects.all()
     context = {'alunos': alunos, 'emprestimos': emprestimos, 'form': AlunoForm}
-    return render(request, 'Pages/alunosPage.html', context)
+    return render(request, 'Pages/alunos.html', context)
 
 def homePage(request):
     livros = Livro.objects.all()[:5]
@@ -42,22 +42,22 @@ def homePage(request):
 def livrosPage(request):
     livros = Livro.objects.all()
     emprestimos = Emprestimo.objects.all()
-    context = {'livros': livros, 'emprestimos': emprestimos, 'page_title': 'Livros'}
+    context = {'livros': livros, 'emprestimos': emprestimos, 'page_title': 'Livros', 'form': LivroForm}
     return render(request, 'Pages/livros.html', context)
 
 def emprestimosPage(request):
     emprestimos = Emprestimo.objects.all()
-    context = {'emprestimos': emprestimos, 'page_title': 'Emprestimos'}
+    context = {'emprestimos': emprestimos, 'page_title': 'Emprestimos', 'form': EmprestimoForm}
     return render(request, 'Pages/emprestimos.html', context)
 
 def autoresPage(request):
     autores = Autor.objects.all()
-    context = {'autores': autores, 'page_title': 'Autores'}
+    context = {'autores': autores, 'page_title': 'Autores', 'form': AutorForm}
     return render(request, 'Pages/autores.html', context)
 
 def editorasPage(request):
     editoras = Editora.objects.all()
-    context = {'editoras': editoras, 'page_title': 'Editoras'}
+    context = {'editoras': editoras, 'page_title': 'Editoras', 'form': EditoraForm}
     return render(request, 'Pages/editoras.html', context)
 
 def modalUser(request):
