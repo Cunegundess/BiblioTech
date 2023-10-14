@@ -11,7 +11,7 @@
         <div class="modal-body text-start">
         <form method="POST" action="">
             {% csrf_token %}
-            {% crispy form %}
+            {% crispy form form.helper %}
         </div>
         <div class="modal-footer">
             <button type="submit" class="btn btn-primary">Salvar</button>

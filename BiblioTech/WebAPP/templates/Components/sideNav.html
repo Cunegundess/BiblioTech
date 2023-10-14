@@ -1,53 +1,75 @@
+<div class="row flex-nowrap">
+    <div class="px-sm-2 bg-light">
+        <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
+            <a href="/" class="d-flex align-items-center pb-4 mb-md-0 me-md-auto text-white text-decoration-none">
+                <span class="fs-5 d-none d-sm-inline fw-bolder text-primary">BIBLIOTECH</span>
+            </a>
 
-    <div class="row flex-nowrap">
-        <div class="px-sm-2 bg-light">
-            <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
-                <a href="/" class="d-flex align-items-center pb-4 mb-md-0 me-md-auto text-white text-decoration-none">
-                    <span class="fs-5 d-none d-sm-inline fw-bolder text-primary">BIBLIOTECH</span>
-                </a>
-
-                <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
-                    <li class="nav-item">
-                        <a href="{% url 'homePage' %}" class="nav-link align-items-center text-primary d-flex">
-                            <i class="fs-4 bi-house"></i><span class="ms-2 d-none d-sm-inline">Home</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{% url 'livrosPage' %}" class="nav-link align-items-center text-secondary d-flex">
-                            <i class="fs-4 bi-book"></i><span class="ms-2 d-none d-sm-inline">Livros</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{% url 'autoresPage' %}" class="nav-link align-items-center text-secondary d-flex">
-                            <i class="fs-4 bi-person-badge"></i><span class="ms-2 d-none d-sm-inline">Autores</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{% url 'editorasPage' %}" class="nav-link align-items-center text-secondary d-flex">
-                            <i class="fs-4 bi bi-award"></i><span class="ms-2 d-none d-sm-inline">Editoras</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{% url 'alunosPage' %}" class="nav-link align-items-center text-secondary d-flex">
-                            <i class="fs-4 bi-person-vcard"></i><span class="ms-2 d-none d-sm-inline">Alunos</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{% url 'emprestimosPage' %}" class="nav-link align-items-center text-secondary d-flex">
-                            <i class="fs-4 bi-card-checklist"></i><span class="ms-2 d-none d-sm-inline">Empréstimos</span>
-                        </a>
-                    </li>
-                </ul>
-                
-                {% include '../Components/modalUsuario.html' %}
-            </div>
-        </div>
-
-        <div class="col p-0">
+            <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
+                <li class="nav-item">
+                    <a href="{% url 'homePage' %}" class="nav-link align-items-center text-secondary d-flex">
+                        <i class="fs-4 bi-house"></i><span class="ms-2 d-none d-sm-inline">Home</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'livrosPage' %}" class="nav-link align-items-center text-secondary d-flex">
+                        <i class="fs-4 bi-book"></i><span class="ms-2 d-none d-sm-inline">Livros</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'autoresPage' %}" class="nav-link align-items-center text-secondary d-flex">
+                        <i class="fs-4 bi-person-badge"></i><span class="ms-2 d-none d-sm-inline">Autores</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'editorasPage' %}" class="nav-link align-items-center text-secondary d-flex">
+                        <i class="fs-4 bi bi-award"></i><span class="ms-2 d-none d-sm-inline">Editoras</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'alunosPage' %}" class="nav-link align-items-center text-secondary d-flex">
+                        <i class="fs-4 bi-person-vcard"></i><span class="ms-2 d-none d-sm-inline">Alunos</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'emprestimosPage' %}" class="nav-link align-items-center text-secondary d-flex">
+                        <i class="fs-4 bi-card-checklist"></i><span class="ms-2 d-none d-sm-inline">Empréstimos</span>
+                    </a>
+                </li>
+            </ul>
             
-            {% block inner_content %}
-            {% endblock inner_content %}
-            
+            {% include '../Components/modalUsuario.html' %}
         </div>
     </div>
+
+    <div class="col p-0">
+        
+        {% block inner_content %}
+        {% endblock inner_content %}
+        
+    </div>
+</div>
+
+<style>
+    .nav-link.active {
+        background-color: unset !important;
+    }
+
+    .nav-link.active i,
+    .nav-link.active span {
+        color: #007bff !important;
+    }
+</style>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var links = document.querySelectorAll('#menu a');
+        for (var i = 0; i < links.length; i++) {
+            if (links[i].href === window.location.href) {
+                links[i].classList.add('active');
+            }
+        }
+    });
+</script>
 

@@ -1,12 +1,10 @@
 from django import forms
+from django.urls import reverse_lazy
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
 from API.models import Autor, Editora, Livro, GeneroLivro, Curso, Aluno, Emprestimo, Devolucao, DetalhesLivro
 
 class adminLogin(forms.Form):
-    def __init__(self, *args, **kwargs):
-        self.helper = FormHelper()
-        super().__init__(*args, **kwargs)
         
     usuario = forms.CharField()
     senha = forms.CharField()
@@ -37,6 +35,14 @@ class CursoForm(forms.ModelForm):
         fields = ['nome', 'setor', 'semestres']
 
 class AlunoForm(forms.ModelForm):
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper(self)
+        self.helper.form_action = reverse_lazy('API:alunos')
+        self.helper.form_method = 'POST'
+        self.helper.add_input(Submit('submit', 'Salvar'))
+
     class Meta:
         model = Aluno
         fields = ['nome', 'email', 'senha', 'contato', 'ra', 'curso']

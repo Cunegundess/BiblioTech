@@ -46,7 +46,7 @@ class AlunosView(APIView):
     def put(self, request, pk):
         try:
             aluno = self.queryset.get(pk=pk)
-        except aluno.DoesNotExist:
+        except Aluno.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
 
         serializer = self.serializer_class(aluno, data=request.data)
