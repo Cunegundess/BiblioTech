@@ -1,9 +1,9 @@
 venv/
 BiblioTech/.env
 BiblioTech/db.lite3
-BiblioTech/Config/__pycache__/*
-BiblioTech/WebAPP/__pycache__/*
-BiblioTech/API/__pycache__/*
-BiblioTech/API/migrations/*
-BiblioTech/WebAPP/migrations/*
+# BiblioTech/Config/__pycache__/*
+# BiblioTech/WebAPP/__pycache__/*
+# BiblioTech/API/__pycache__/*
+# BiblioTech/API/migrations/*
+# BiblioTech/WebAPP/migrations/*
 
