@@ -10,11 +10,11 @@
         </div>
 
         <!-- Conteúdo Principal -->
-        <div class="col p-4">
+        <div class="col p-4" style="height: 100%;">
             {% block inner_content %}
                 {% include '../Components/header.html' with titulo="Home" %}
-                {% comment %} <div class="mt-4"> {% endcomment %}
-                    <div class="mt-4 row g-3">
+                {% include '../Components/cards/cardTab.html' %}
+                    {% comment %} <div class="mt-4 row g-3">
                         
                         <div class="col-md-6 d-flex flex-column">
                             {% include '../Components/cards/cardTab.html' %}
@@ -25,8 +25,7 @@
                             {% include '../Components/cards/cardEmprestimo.html' %}
                         </div>
                         
-                    </div>
-                {% comment %} </div> {% endcomment %}
+                    </div> {% endcomment %}
             {% endblock inner_content %}
         </div>
     </div>

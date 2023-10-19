@@ -22,8 +22,13 @@
                         {% include '../Components/tables/tableAluno.html' with titulo="Alunos" %}
                     </div>
                 </div>
+
+                <div class="my-4">
+                    {% include '../Components/pagination.html' with page_obj=alunos %}
+                </div>
                 {% endblock inner_content %}
             </div>
         </div>
     </div>
+
 {% endblock %}

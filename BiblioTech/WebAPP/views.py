@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from API.models import Livro, Autor, Editora, Emprestimo, Aluno
 # from django.contrib.auth.forms import UserCreationForm
+from django.core.paginator import Paginator
 from WebAPP.forms import *
 
 # Create your views here.
@@ -11,8 +12,6 @@ def loginPage(request):
     context = {'form': adminLogin}
     return render(request, 'Pages/login.html', context)
 
-def cadastroPage(request):
-    return render(request, 'Pages/cadastro.html')
 
 def senhaPage(request):
     return render(request, 'Pages/senha.html')
@@ -21,6 +20,12 @@ def senhaPage(request):
 def alunosPage(request):
     alunos = Aluno.objects.all()
     emprestimos = Emprestimo.objects.all()
+    
+    # Paginação
+    paginator = Paginator(alunos, 6)
+    page = request.GET.get('page')
+    alunos = paginator.get_page(page)
+
     context = {'alunos': alunos, 'emprestimos': emprestimos, 'form': AlunoForm}
     return render(request, 'Pages/alunos.html', context)
 
