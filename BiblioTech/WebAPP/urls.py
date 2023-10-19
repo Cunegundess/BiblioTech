@@ -6,6 +6,7 @@ urlpatterns = [
     path('login/', views.loginPage, name='loginPage'),
     path('senha/', views.senhaPage, name='senhaPage'),
     path('home/', views.homePage, name='homePage'),
+    path('home/pesquisa/', views.pesquisa, name='pesquisa'),
     path('home/alunos/', views.alunosPage, name='alunosPage'),
     path('home/livros/', views.livrosPage, name='livrosPage'),
     path('home/livros/<int:pk>/', views.editarLivro, name='editarLivro'),
@@ -13,5 +14,6 @@ urlpatterns = [
     path('home/autores/', views.autoresPage, name='autoresPage'),
     path('home/autores/<int:pk>/', views.editarAutor, name='editarAutor'),
     path('home/editoras/', views.editorasPage, name='editorasPage'),
-    path('home/editoras/<int:pk>/', views.editarEditora, name='editarEditora')
+    path('home/editoras/<int:pk>/', views.editarEditora, name='editarEditora'),
+    path('home/cadastrar_curso', views.cadastrarCurso, name='cadastrarCurso')
 ]

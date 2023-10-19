@@ -2,12 +2,14 @@
 
     <h1 class="fs-2 fw-bolder mb-3 mx-4">{{ titulo }}</h1>
 
-    <form class="d-flex pe-4 h-75">
+    <form class="d-flex pe-4 h-75" method="POST">
+        {% csrf_token %}
         <div class="input-group">
-            <button id="search-button" type="button" class="btn btn-primary">
+            <button id="search-button" type="submit" class="btn btn-primary"> <!-- Mude o tipo para 'submit' -->
                 <i class="bi bi-search"></i>
             </button>
-            <input id="search-input" type="search" class="form-control" placeholder="Livros, Autores..."/>
+            <input id="search-input" name="consulta" type="search" class="form-control" placeholder="Livros, Autores..."/> <!-- Adicione um atributo 'name' ao input -->
         </div>
     </form>
+    
 </div>

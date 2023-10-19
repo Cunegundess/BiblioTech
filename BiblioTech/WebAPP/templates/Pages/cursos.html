@@ -10,7 +10,7 @@
 
             <div class="col p-4">
                 {% block inner_content %}
-                {% include '../Components/header.html' with titulo="Alunos" %}
+                {% include '../Components/header.html' with titulo="Cursos" %}
                 <div class="card shadow-lg h-75 mt-5">
                     <div class="card-header d-flex align-items-center justify-content-between">
                         <div class="d-flex align-items-center">
@@ -18,26 +18,23 @@
                                 <i class="bi bi-funnel"></i>
                             </button>
                         </div>
-                        
-                        <button type="button" class="btn bg-primary text-light" data-bs-toggle="modal" data-bs-target="#formAluno">
-                            <i class="bi bi-person-plus-fill"></i>
+                        <button type="button" class="btn bg-primary text-light" data-bs-toggle="modal" data-bs-target="#formCurso">
+                                <i class="bi bi-person-plus-fill"></i>
                         </button>
-                        
-                    {% include '../Components/forms/formAluno.html' %}
+                        {% include '../Components/forms/formCurso.html' %}
                     </div>
                     <div class="card-body text-center">
-                        {% include '../Components/tables/tableAluno.html' with titulo="Alunos" %}
+                        {% include '../Components/tables/tableCurso.html' with titulo="Cursos" %}
                     </div>
                 </div>
 
                 <div class="my-4">
-                    {% include '../Components/pagination.html' with page_obj=alunos %}
+                    {% include '../Components/pagination.html' with page_obj=cursos %}
                 </div>
                 {% endblock inner_content %}
             </div>
         </div>
     </div>
-
     <div class="modal fade" id="filtro" tabindex="-1" aria-labelledby="filtro" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
           <div class="modal-content">

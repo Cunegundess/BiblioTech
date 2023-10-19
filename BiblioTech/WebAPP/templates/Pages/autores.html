@@ -12,14 +12,24 @@
                 {% block inner_content %}
                 {% include '../Components/header.html' with titulo="Autores" %}
                 <div class="card shadow-lg h-75 mt-5">
-                    <div class="card-header text-end">
-                        <button type="button" class="btn btn-sm bg-primary text-light" data-bs-toggle="modal" data-bs-target="#formAutor">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <div class="d-flex align-items-center">
+                            <button type="button" class="btn bg-primary text-light me-2" data-bs-toggle="modal" data-bs-target="#filtro">
+                                <i class="bi bi-funnel"></i>
+                            </button>
+                        </div>
+                    
+                        <button type="button" class="btn bg-primary text-light" data-bs-toggle="modal" data-bs-target="#formAutor">
                             <i class="bi bi-person-plus-fill"></i>
                         </button>
+                        
                         {% include '../Components/forms/formAutor.html' %}
                     </div>
+                    
                     <div class="card-body text-center">
-                        {% include '../Components/tables/tableAutor.html' %}
+
+                            {% include '../Components/tables/tableAutor.html' %}
+
                     </div>
                 </div>
                     
@@ -30,4 +40,21 @@
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="filtro" tabindex="-1" aria-labelledby="filtro" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="filtrolabel">Filtrar</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+            <div class="modal-body text-start">
+                {% include '../Components/filtro.html' %}
+            </div> 
+        </div>
+      </div>
+    </div>
+    
+    
+    
 {% endblock %}

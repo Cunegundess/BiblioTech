@@ -1,0 +1,54 @@
+{% load crispy_forms_tags %}
+
+
+<div class="modal fade" id="formCurso" tabindex="-1" aria-labelledby="formCurso" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="FormCursoLabel">Cadastrar Curso</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+        <div class="modal-body text-start">
+        <form id="ajaxFormCurso" method="POST" action="{% url 'API:cursos'%}">
+            {% csrf_token %}
+            {% crispy form form.helper %}
+        </div>
+        <div class="modal-footer">
+            <button id="salvarButton" form="ajaxFormCurso" type="submit" class="btn btn-primary" onsubmit="return false;">Salvar</button>
+        </div>
+        </form>
+    </div>
+  </div>
+</div>
+
+<style>
+    .asteriskField {
+        display: none;
+    }            
+</style>
+
+<script>
+$(document).ready(function() {
+    $('#salvarButton').on('click', function(e) {
+        e.preventDefault(); // Impede o comportamento padrão do botão (envio tradicional)
+
+        // Pega os dados do formulário
+        var formData = $('#ajaxFormCurso').serialize();
+
+        // Faz uma requisição AJAX para o endpoint desejado
+        $.ajax({
+            url: '{% url "API:cursos" %}',
+            type: 'POST',
+            data: formData,
+            success: function(response) {
+                console.log(response);
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });
+    });
+});
+
+
+</script>

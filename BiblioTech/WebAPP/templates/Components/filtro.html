@@ -1,0 +1,16 @@
+{% load crispy_forms_tags %}
+<form class="d-flex row align-items-center justify-content-between" method="get">
+    {% for field in filtro.form %}
+        <div class="col-6 w-50 ps-2 pe-1 pb-0 pt-1">
+            {{ field|as_crispy_field }}
+        </div>
+    {% endfor %}
+
+    <div class="modal-footer m-0 p-0 w-100">
+        <button type="submit" class="btn btn-primary btn-md mt-3 me-3">Filtrar</button>
+      </div>
+
+
+</form>
+
+

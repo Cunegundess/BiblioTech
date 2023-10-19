@@ -115,3 +115,14 @@ class DetalhesLivroForm(forms.ModelForm):
         model = DetalhesLivro
         fields = ['autor', 'editora', 'genero', 'unidades', 'emprestimo']
 
+class PesquisaForm(forms.Form):
+    consulta = forms.CharField(max_length=100, required=False, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Livros, Autores...'}))
+
+    # def __init__(self, *args, **kwargs):
+    #     super().__init__(*args, **kwargs)
+    #     self.helper = FormHelper(self)
+    #     self.helper.form_action = reverse_lazy('API:detalheslivros')
+    #     self.helper.form_method = 'POST'
+        # self.helper.add_input(Submit('submit', 'Salvar'))
+
+

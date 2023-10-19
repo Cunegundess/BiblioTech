@@ -75,3 +75,14 @@ class DetalhesLivro(models.Model):
 
     def __str__(self):
         return f'{self.autor} - {self.Editora} - {self.genero}'
+    
+class Filtro(models.Model):
+    autor = models.ForeignKey(Autor, on_delete=models.SET_NULL, null=True)
+    editora = models.ForeignKey(Editora, on_delete=models.SET_NULL, null=True)
+    genero = models.ForeignKey(GeneroLivro, on_delete=models.SET_NULL, null=True)
+    aluno = models.ForeignKey(Aluno, on_delete=models.SET_NULL, null=True)
+    curso = models.ForeignKey(Curso, on_delete=models.SET_NULL, null=True)
+    livro = models.ForeignKey(Livro, on_delete=models.SET_NULL, null=True)
+    emprestimo = models.ForeignKey(Emprestimo, on_delete=models.SET_NULL, null=True)
+    devolucao = models.ForeignKey(Devolucao, on_delete=models.SET_NULL, null=True)
+    detalhesLivro = models.ForeignKey(DetalhesLivro, on_delete=models.SET_NULL, null=True)
