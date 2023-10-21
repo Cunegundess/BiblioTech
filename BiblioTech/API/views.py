@@ -1,7 +1,9 @@
 from django.shortcuts import render
-from rest_framework import status
+from rest_framework import status, viewsets
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from django.contrib.auth import get_user_model
 from .models import *
 from .serializers import *
 
@@ -28,6 +30,14 @@ def routesList(request):
     ]
 
     return render(request, 'routes.html', {'routes': routes})
+
+
+class UserViewset(viewsets.ModelViewSet):
+    permission_classes = [IsAuthenticated]
+    serializer_class = UserSerializer
+    queryset = get_user_model().objects.all()
+
+
 class AlunosView(APIView):
     queryset = Aluno.objects.all()
     serializer_class = AlunoSerializer

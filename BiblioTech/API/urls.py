@@ -1,10 +1,22 @@
+from django.db import router
 from django.urls import path
 from .views import *
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+)
+from rest_framework.routers import DefaultRouter
 
 app_name = 'API'
 
+
 urlpatterns = [
     path('', routesList, name='routes-list'),
+
+    # JWT
+    path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+
     # Autor
     path('autores/', AutoresView.as_view(), name='autores'),
     path('autor/<int:pk>/', AutorView.as_view(), name='autor'),
@@ -41,3 +53,7 @@ urlpatterns = [
     path('cursos/', CursosView.as_view(), name='cursos'),
     path('curso/<int:pk>/', CursoView.as_view(), name='curso'),
 ]
+
+router = DefaultRouter()
+router.register('user', UserViewset, basename='user')
+urlpatterns += router.urls
