@@ -6,10 +6,12 @@ from django.core.paginator import Paginator
 from WebAPP.forms import *
 from .utils import *
 from .filter import *
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def bibliotechPage(request):
     return render(request, 'Pages/bibliotech.html')
+
 
 def loginPage(request):
     context = {'form': adminLogin}
@@ -20,6 +22,7 @@ def senhaPage(request):
     return render(request, 'Pages/senha.html')
 
 
+@login_required
 def alunosPage(request):
     alunos = Aluno.objects.all()
     emprestimos = Emprestimo.objects.all()
@@ -36,6 +39,8 @@ def alunosPage(request):
     context = {'alunos': alunos, 'emprestimos': emprestimos, 'form': AlunoForm, 'filtro': filtro}
     return render(request, 'Pages/alunos.html', context)
 
+
+@login_required
 def homePage(request):
     livros = Livro.objects.all()[:5]
     editoras = Editora.objects.all()[:5]
@@ -51,6 +56,8 @@ def homePage(request):
     }
     return render(request, 'Pages/home.html', context)
 
+
+@login_required
 def livrosPage(request):
     livros = Livro.objects.all()
     emprestimos = Emprestimo.objects.all()
@@ -67,6 +74,8 @@ def livrosPage(request):
     context = {'livros': livros, 'emprestimos': emprestimos, 'page_title': 'Livros', 'form': LivroForm, 'filtro': filtro}
     return render(request, 'Pages/livros.html', context)
 
+
+@login_required
 def emprestimosPage(request):
     emprestimos = Emprestimo.objects.all()
 
@@ -82,6 +91,8 @@ def emprestimosPage(request):
     context = {'emprestimos': emprestimos, 'page_title': 'Emprestimos', 'form': EmprestimoForm, 'filtro': filtro}
     return render(request, 'Pages/emprestimos.html', context)
 
+
+@login_required
 def autoresPage(request):
     autores = Autor.objects.all()
     
@@ -97,6 +108,8 @@ def autoresPage(request):
     context = {'autores': autores, 'page_title': 'Autores', 'form': AutorForm, 'filtro': filtro}
     return render(request, 'Pages/autores.html', context)
 
+
+@login_required
 def editorasPage(request):
     editoras = Editora.objects.all()
 
@@ -112,11 +125,15 @@ def editorasPage(request):
     context = {'editoras': editoras, 'page_title': 'Editoras', 'form': EditoraForm, 'filtro': filtro}
     return render(request, 'Pages/editoras.html', context)
 
+
+@login_required
 def modalUser(request):
     Alunos = Aluno.objects.all()
     context = {'Alunos': Alunos}
     return render(request, context)
 
+
+@login_required
 def editarLivro(request, pk):
     # livros = Livro.objects.all()
     # context = {'livros': livros}
@@ -126,6 +143,8 @@ def editarLivro(request, pk):
     
     return render(request, 'Pages/editarLivro.html', titulo)
 
+
+@login_required
 def editarAutor(request, pk):
     # autores = Autor.objects.all()
     # context = {'autores': autores}
@@ -134,6 +153,8 @@ def editarAutor(request, pk):
     }
     return render(request, 'Pages/editarAutor.html', titulo)
 
+
+@login_required
 def editarEditora(request, pk):
     # editoras = Editora.objects.all()
     # context = {'editoras': editoras}
@@ -142,6 +163,8 @@ def editarEditora(request, pk):
     }
     return render(request, 'Pages/editarEditora.html', titulo)
 
+
+@login_required
 def cadastrarCurso(request):
     cursos = Curso.objects.all()
     
@@ -153,6 +176,7 @@ def cadastrarCurso(request):
     return render(request, 'Pages/cursos.html', context)
 
 
+@login_required
 def pesquisa(request):
     resultados = []
 

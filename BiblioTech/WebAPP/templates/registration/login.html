@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+<html>
+    <body>    
+    {% block content %}
+
+    
+    <div class="container-fluid p-0">
+
+        {% include '../Components/rightDesign.html' %}
+
+        <div class="m-5">
+            {% include '../Components/returnButton.html' %}
+        </div>
+
+        <form method="post" class="m-5 w-50 vh-50 text-center" action="{% url 'login' %}">
+            <h1 class="text-primary mb-5">Bem vindo de volta!</h1>
+            {% csrf_token %}
+            {{ form|crispy }}
+            {% comment %} <input type="hidden" name="next" value="{{ next }}"> {% endcomment %}
+            <button type="submit" class="btn btn-primary w-50 rounded-pill ms-5 p-2 shadow-lg">Login</button>
+        </form>
+
+        </div>
+
+        <style>
+            body {
+                overflow: hidden;
+            }
+            .asteriskField {
+                display: none;
+            }            
+        </style>
+        
+    {% endblock %}
+</body>
+</html>

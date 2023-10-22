@@ -44,7 +44,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'API',
     'WebAPP',
-    'Accounts',
     'rest_framework',
     'bootstrap5',
     'crispy_forms',
@@ -66,6 +65,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.locale.LocaleMiddleware'
 ]
 
 ROOT_URLCONF = 'Config.urls'
@@ -73,9 +73,8 @@ ROOT_URLCONF = 'Config.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'WebAPP/templates')],
         'APP_DIRS': True,
-        'DIRS': [BASE_DIR / 'templates'],
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
@@ -131,7 +130,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'pt-BR'
 
 TIME_ZONE = 'UTC'
 
@@ -180,4 +179,7 @@ STATICFILES_DIRS = [
     # BASE_DIR / "static",
     BASE_DIR / "WebAPP/static"
 ]
+
+LOGIN_REDIRECT_URL = 'http://127.0.0.1:8000/home'
+LOGOUT_REDIRECT_URL = 'http://127.0.0.1:8000'
 
