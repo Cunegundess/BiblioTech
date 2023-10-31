@@ -1,4 +1,5 @@
 {% load crispy_forms_tags %}
+{% load static %}
 
 
 <div class="modal fade" id="formAutor" tabindex="-1" aria-labelledby="formAutor" aria-hidden="true">
@@ -9,9 +10,9 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
         <div class="modal-body text-start">
-        <form id="AutorForm" method="POST" action="{% url 'API:autores'%}">
+        <form id="AutorForm">
             {% csrf_token %}
-            {% crispy form form.helper %}
+            {{ form|crispy }}
         </div>
         <div class="modal-footer">
             <button form="AutorForm" type="submit" class="btn btn-primary">Salvar</button>
@@ -26,3 +27,5 @@
         display: none;
     }            
 </style>
+
+<script src="{% static 'js/formAutor.js' %}"></script>

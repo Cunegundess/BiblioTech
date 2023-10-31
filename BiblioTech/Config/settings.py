@@ -143,6 +143,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
 
 # MEDIA_URL = '/media/'
 # MEDIA_ROOT = BASE_DIR / "media"
@@ -156,6 +158,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 10,
+    'URL_FORMAT_OVERRIDE': None,
 
     # 'DEFAULT_RENDERER_CLASSES': [
     #     'rest_framework.renderers.TemplateHTMLRenderer'

@@ -6,6 +6,9 @@ from rest_framework.response import Response
 from django.contrib.auth import get_user_model
 from .models import *
 from .serializers import *
+from datetime import datetime
+from .utils import converter_dataAutor
+
 
 def routesList(request):
     routes = [
@@ -96,6 +99,8 @@ class AlunoView(APIView):
             aluno.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
         return Response(status=status.HTTP_404_NOT_FOUND)
+
+
 class AutoresView(APIView):
     queryset = Autor.objects.all()
     serializer_class = AutorSerializer
@@ -105,11 +110,23 @@ class AutoresView(APIView):
         return Response(serializer.data)
     
     def post(self, request):
-        serializer = self.serializer_class(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        # Faça uma cópia editável do QueryDict
+        dados_editaveis = request.data.copy()
+
+        data_nascimento_str = dados_editaveis.get('data_nascimento')
+        data_nascimento = converter_dataAutor(data_nascimento_str)
+
+        if data_nascimento is not None:
+            dados_editaveis['data_nascimento'] = data_nascimento
+
+            serializer = self.serializer_class(data=dados_editaveis)
+            if serializer.is_valid():
+                serializer.save()
+                return Response(serializer.data, status=status.HTTP_201_CREATED)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        else:
+            return Response({'error': 'Formato de data inválido'}, status=status.HTTP_400_BAD_REQUEST)
+
     
     def put(self, request, pk):
         try:

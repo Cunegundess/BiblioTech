@@ -10,11 +10,11 @@ class adminLogin(forms.Form):
     senha = forms.CharField()
 
 class AutorForm(forms.ModelForm):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.helper = FormHelper(self)
-        self.helper.form_action = reverse_lazy('API:autores')
-        self.helper.form_method = 'POST'
+    # def __init__(self, *args, **kwargs):
+    #     super().__init__(*args, **kwargs)
+    #     self.helper = FormHelper(self)
+    #     self.helper.form_action = reverse_lazy('API:autores')
+    #     self.helper.form_method = 'POST'
         # self.helper.add_input(Submit('submit', 'Salvar'))
 
     class Meta:

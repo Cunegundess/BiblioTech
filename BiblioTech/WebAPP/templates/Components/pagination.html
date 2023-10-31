@@ -1,4 +1,6 @@
-<nav aria-label="Page navigation example">
+{% load static %}
+
+<nav id="pagination-container" aria-label="Page navigation example">
   <ul class="pagination justify-content-center">
     {% if page_obj.has_previous %}
       <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">Anterior</a></li>
@@ -21,3 +23,5 @@
       {% endif %}
   </ul>
 </nav>
+
+<script src="{% static 'js/pagination.js' %}"></script>

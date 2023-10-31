@@ -2,7 +2,7 @@ from django.apps import apps
 from django.shortcuts import render
 from API.models import *
 # from django.contrib.auth.forms import UserCreationForm
-from django.core.paginator import Paginator
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from WebAPP.forms import *
 from .utils import *
 from .filter import *
@@ -104,6 +104,13 @@ def autoresPage(request):
     paginator = Paginator(autores, 6)
     page = request.GET.get('page')
     autores = paginator.get_page(page)
+
+    try:
+        autores = paginator.page(page)
+    except PageNotAnInteger:
+        autores = paginator.page(1)
+    except EmptyPage:
+        autores = paginator.page(paginator.num_pages)
     
     context = {'autores': autores, 'page_title': 'Autores', 'form': AutorForm, 'filtro': filtro}
     return render(request, 'Pages/autores.html', context)

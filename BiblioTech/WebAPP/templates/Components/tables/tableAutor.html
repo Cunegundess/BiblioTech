@@ -1,4 +1,6 @@
-<table class="table table-hover">
+{% load static %}
+
+<table id="tabela-autores" class="table table-hover">
     <thead>
         <tr>
             <th scope="col">Nome</th>
@@ -7,7 +9,7 @@
         </tr>
     </thead>
     <tbody>
-        {% for autor in autores %}
+        {% comment %} {% for autor in autores %}
         <tr>
             <td>{{ autor.nome }}</td>
             <td>{{ autor.nacionalidade }}</td>
@@ -19,6 +21,8 @@
                 </button>
             </td>
         </tr>
-        {% endfor %}
+        {% endfor %} {% endcomment %}
     </tbody>
 </table>
+
+<script src="{% static 'js/tableAutor.js' %}"></script>
