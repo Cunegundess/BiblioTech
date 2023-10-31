@@ -1,4 +1,6 @@
-<table class="table table-hover">
+{% load static %}
+
+<table id="tabela-livros" class="table table-hover">
     <thead>
         <tr>
             <th scope="col">Título</th>
@@ -6,21 +8,7 @@
             <th scope="col">Empréstimo</th>
         </tr>
     </thead>
-    <tbody>
-        {% for livro in livros %}
-        <tr>
-            <td>{{ livro.titulo }}</td>
-            <td>{{ livro.autor }}</td>
-            {% for emprestimo in emprestimos %}
-            <td>{{ emprestimo.aluno }}</td>
-            {% endfor %}
-            <td>
-                <button type="button" class="btn btn-sm bg-primary text-light">
-                    <i class="bi bi-pencil-square me-1"></i>
-                    Editar
-                </button>
-            </td>
-        </tr>
-        {% endfor %}
-    </tbody>
+    <tbody></tbody>
 </table>
+
+<script src="{% static 'js/livroPage.js' %}"></script>

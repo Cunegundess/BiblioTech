@@ -1,5 +1,5 @@
 {% load crispy_forms_tags %}
-
+{% load static %}
 
 <div class="modal fade" id="formLivro" tabindex="-1" aria-labelledby="formLivro" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
@@ -9,12 +9,12 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
         <div class="modal-body text-start">
-        <form id="LivroForm" method="POST" action="{% url 'API:livros'%}">
-            {% csrf_token %}
-            {% crispy form form.helper %}
+        <form id="livroForm">
+          {% csrf_token %}
+          {{ form|crispy }}
         </div>
         <div class="modal-footer">
-            <button form="LivroForm" type="submit" class="btn btn-primary">Salvar</button>
+            <button form="livroForm" type="submit" class="btn btn-primary">Salvar</button>
         </div>
         </form>
     </div>
@@ -26,3 +26,5 @@
         display: none;
     }            
 </style>
+
+<script src="{% static 'js/livroPage.js' %}"></script>

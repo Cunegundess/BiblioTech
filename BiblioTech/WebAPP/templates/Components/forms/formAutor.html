@@ -10,12 +10,12 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
         <div class="modal-body text-start">
-        <form id="AutorForm">
+        <form id="autorForm">
             {% csrf_token %}
             {{ form|crispy }}
         </div>
         <div class="modal-footer">
-            <button form="AutorForm" type="submit" class="btn btn-primary">Salvar</button>
+            <button type="submit" class="btn btn-primary">Salvar</button>
         </div>
         </form>
     </div>
@@ -28,4 +28,4 @@
     }            
 </style>
 
-<script src="{% static 'js/formAutor.js' %}"></script>
+<script src="{% static 'js/autorPage.js' %}"></script>

@@ -183,22 +183,68 @@ def cadastrarCurso(request):
     return render(request, 'Pages/cursos.html', context)
 
 
-@login_required
+# @login_required
+# def pesquisa(request):
+#     resultados = []
+
+#     if request.method == 'POST':
+#         form = PesquisaForm(request.POST)
+
+#         if form.is_valid():
+#             consulta = form.cleaned_data['consulta']
+#             resultados = pesquisar(consulta)
+#     else:
+#         form = PesquisaForm()
+
+#     context = {
+#         'form': form,
+#         'resultados': resultados,
+#     }
+
+#     return render(request, 'pesquisa.html', context)
+
 def pesquisa(request):
-    resultados = []
-
-    if request.method == 'POST':
-        form = PesquisaForm(request.POST)
-
-        if form.is_valid():
-            consulta = form.cleaned_data['consulta']
-            resultados = pesquisar(consulta)
+    if 'consulta' in request.POST:
+        consulta = request.POST['consulta']
+        autores = Autor.objects.filter(nome__icontains=consulta)
+        livros = Livro.objects.filter(titulo__icontains=consulta)
+        # Adicione mais filtros para outros modelos, se necessário
     else:
-        form = PesquisaForm()
+        autores = Autor.objects.none()
+        livros = Livro.objects.none()
 
     context = {
-        'form': form,
-        'resultados': resultados,
+        'autores': autores,
+        'livros': livros,
+        'consulta': consulta
     }
 
-    return render(request, 'pesquisa.html', context)
+    return render(request, 'resultadosPesquisa.html', context)
+
+def resultados_pesquisa(request):
+    consulta = request.GET.get('consulta')
+
+    resultados_livros = Livro.objects.filter(titulo__icontains=consulta)
+    resultados_autores = Autor.objects.filter(nome__icontains=consulta)
+    resultados_editoras = Editora.objects.filter(nome__icontains=consulta)
+    resultados_generoLivros = GeneroLivro.objects.filter(titulo__icontains=consulta)
+    resultados_cursos = Curso.objects.filter(nome__icontains=consulta)
+    resultados_alunos = Aluno.objects.filter(nome__icontains=consulta)
+    resultados_emprestimos = Emprestimo.objects.filter(livro__icontains=consulta)
+    resultados_devolucao = Devolucao.objects.filter(emprestimo__icontains=consulta)
+    resultados_detalhesLivro = DetalhesLivro.objects.filter(autor__icontains=consulta)
+
+    # Combine os resultados conforme necessário
+    context = {
+        'livros': list(resultados_livros.values()),  # Converte para uma lista de dicionários
+        'autores': list(resultados_autores.values()),
+        'editoras': list(resultados_editoras.values()),
+        'generoLivros': list(resultados_generoLivros.values()),  # Converte para uma lista de dicionários
+        'cursos': list(resultados_cursos.values()),
+        'alunos': list(resultados_alunos.values()),
+        'emprestimos': list(resultados_emprestimos.values()),  # Converte para uma lista de dicionários
+        'devolucao': list(resultados_devolucao.values()),
+        'detalhesLivro': list(resultados_detalhesLivro.values())
+    }
+
+    return render(request, 'resultadosPesquisa.html', context)

@@ -4,10 +4,10 @@ function carregarPaginacao(url, paginaAtual) {
     $.ajax({
         url: url,
         method: 'GET',
-        dataType: 'html',
+        dataType: 'json', // Alterado para JSON, assumindo que o backend retorna JSON
         data: { page: paginaAtual },
         success: function(data) {
-            paginaContainer.html(data);
+            atualizarTabela(data);
         }
     });
 }

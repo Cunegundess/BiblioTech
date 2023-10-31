@@ -24,5 +24,7 @@ urlpatterns = [
     path('home/autores/<int:pk>/', views.editarAutor, name='editarAutor'),
     path('home/editoras/', views.editorasPage, name='editorasPage'),
     path('home/editoras/<int:pk>/', views.editarEditora, name='editarEditora'),
-    path('home/cadastrar_curso', views.cadastrarCurso, name='cadastrarCurso')
+    path('home/cadastrar_curso', views.cadastrarCurso, name='cadastrarCurso'),
+    path('home/resultados_pesquisa/', views.resultados_pesquisa, name='resultados_pesquisa'),
+
 ]

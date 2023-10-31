@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="row flex-nowrap">
+            <div class="col-auto bg-light">
+                {% include '../Components/sideNav.html' %}
+            </div>
+
+            <div class="col p-4">
+                {% block inner_content %}
+                {% include '../Components/header.html' with titulo="Resultados" %}
+                <div class="card shadow-lg h-75 mt-5">
+                    <div class="card-header d-flex align-items-center justify-content-between"></div>
+                    <ul>
+                        {% for resultado in resultados %}
+                            <li>{{ resultado }}</li>
+                        {% endfor %}
+                    </ul> 
+                <div class="my-4">
+                    {% include '../Components/pagination.html' with page_obj=resultados %}
+                </div>
+                {% endblock inner_content %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

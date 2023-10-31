@@ -1,3 +1,5 @@
+{% load static %}
+
 <div class="row flex-nowrap sideNav">
     <div class="px-sm-2 bg-light">
         <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
@@ -47,8 +49,8 @@
                     </ul>                   
                 </li>
             </ul>
-            
             {% include '../Components/modals/modalConta.html' %}
+            
         </div>
     </div>
 
@@ -72,14 +74,5 @@
 </style>
 
 
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        var links = document.querySelectorAll('#menu a');
-        for (var i = 0; i < links.length; i++) {
-            if (links[i].href === window.location.href) {
-                links[i].classList.add('active');
-            }
-        }
-    });
-</script>
+<script src="{% static 'js/sideNav.js' %}"></script>
 

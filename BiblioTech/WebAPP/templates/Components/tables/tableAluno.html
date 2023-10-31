@@ -1,4 +1,6 @@
-<table class="table table-hover table-bordeless">
+{% load static %}
+
+<table id="tabela-alunos" class="table table-hover table-bordeless">
     <thead>
         <tr>
             <th scope="col">Nome</th>
@@ -6,30 +8,7 @@
             <th scope="col">Curso</th>
         </tr>
     </thead>
-    <tbody>
-        {% for aluno in alunos %}
-        <tr>
-            <td>{{ aluno.nome }}</td>
-            <td>{{ aluno.ra }}</td>
-            
-
-            <td> {{ aluno.curso.nome }}
-            {% comment %} {% if aluno.emprestimos.exists %}
-                {% for emprestimo in aluno.emprestimos.all %}
-                    {{ emprestimo.livro }}
-                {% endfor %}
-                {% else %}
-                    Nenhum empréstimo
-                {% endif %} {% endcomment %}
-            </td>
-
-            <td>
-                <button type="button" class="btn btn-sm bg-primary text-light">
-                    <i class="bi bi-pencil-square me-1"></i>
-                    Editar
-                </button>
-            </td>
-        </tr>
-        {% endfor %}
-    </tbody>
+    <tbody></tbody>
 </table>
+
+<script src="{% static 'js/alunoPage.js' %}"></script>

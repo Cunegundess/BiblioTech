@@ -1,4 +1,6 @@
-<table class="table table-hover table-bordeless">
+{% load static %}
+
+<table id="tabela-cursos" class="table table-hover table-bordeless">
     <thead>
         <tr>
             <th scope="col">Nome</th>
@@ -6,22 +8,7 @@
             <th scope="col">Semestres</th>
         </tr>
     </thead>
-    <tbody>
-        {% for curso in cursos %}
-        <tr>
-            <td>{{ curso.nome }}</td>
-            <td>{{ curso.setor }}</td>
-            
-
-            <td> {{ curso.semestres }}</td>
-
-            <td>
-                <button type="button" class="btn btn-sm bg-primary text-light">
-                    <i class="bi bi-pencil-square me-1"></i>
-                    Editar
-                </button>
-            </td>
-        </tr>
-        {% endfor %}
-    </tbody>
+    <tbody></tbody>
 </table>
+
+<script src="{% static 'js/cursoPage.js' %}"></script>

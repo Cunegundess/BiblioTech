@@ -8,6 +8,7 @@ from .models import *
 from .serializers import *
 from datetime import datetime
 from .utils import converter_dataAutor
+from django.http import JsonResponse
 
 
 def routesList(request):
@@ -589,3 +590,33 @@ class CursoView(APIView):
             curso.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
         return Response(status=status.HTTP_404_NOT_FOUND)
+    
+
+def pesquisa(request):
+    consulta = request.GET.get('consulta', '')  # Obtém o parâmetro de consulta da requisição
+
+    # Realize a lógica de pesquisa aqui
+    resultados_livros = Livro.objects.filter(titulo__icontains=consulta)
+    resultados_autores = Autor.objects.filter(nome__icontains=consulta)
+    resultados_editoras = Editora.objects.filter(nome__icontains=consulta)
+    resultados_generoLivros = GeneroLivro.objects.filter(titulo__icontains=consulta)
+    resultados_cursos = Curso.objects.filter(nome__icontains=consulta)
+    resultados_alunos = Aluno.objects.filter(nome__icontains=consulta)
+    resultados_emprestimos = Emprestimo.objects.filter(titulo__icontains=consulta)
+    resultados_devolucao = Devolucao.objects.filter(nome__icontains=consulta)
+    resultados_detalhesLivro = DetalhesLivro.objects.filter(nome__icontains=consulta)
+
+    # Combine os resultados conforme necessário
+    resultados = {
+        'livros': list(resultados_livros.values()),  # Converte para uma lista de dicionários
+        'autores': list(resultados_autores.values()),
+        'editoras': list(resultados_editoras.values()),
+        'generoLivros': list(resultados_generoLivros.values()),  # Converte para uma lista de dicionários
+        'cursos': list(resultados_cursos.values()),
+        'alunos': list(resultados_alunos.values()),
+        'emprestimos': list(resultados_emprestimos.values()),  # Converte para uma lista de dicionários
+        'devolucao': list(resultados_devolucao.values()),
+        'detalhesLivro': list(resultados_detalhesLivro.values())
+    }
+
+    return JsonResponse(resultados, safe=False)
