@@ -16,7 +16,7 @@
         </div>
 
         <form method="post" class="m-5 w-50 vh-50 text-center" action="{% url 'login' %}">
-            <h1 class="text-primary mb-5">Bem vindo de volta!</h1>
+            <h1 class="text-primary mb-4">Bem vindo de volta!</h1>
             {% csrf_token %}
             {{ form|crispy }}
             {% comment %} <input type="hidden" name="next" value="{{ next }}"> {% endcomment %}

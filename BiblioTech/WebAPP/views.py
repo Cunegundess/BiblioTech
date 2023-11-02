@@ -7,19 +7,12 @@ from WebAPP.forms import *
 from .utils import *
 from .filter import *
 from django.contrib.auth.decorators import login_required
+from Accounts.forms import *
+
 
 # Create your views here.
 def bibliotechPage(request):
     return render(request, 'Pages/bibliotech.html')
-
-
-def loginPage(request):
-    context = {'form': adminLogin}
-    return render(request, 'Pages/login.html', context)
-
-
-def senhaPage(request):
-    return render(request, 'Pages/senha.html')
 
 
 @login_required

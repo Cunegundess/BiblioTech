@@ -4,11 +4,6 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
 from API.models import Autor, Editora, Livro, GeneroLivro, Curso, Aluno, Emprestimo, Devolucao, DetalhesLivro
 
-class adminLogin(forms.Form):
-        
-    usuario = forms.CharField()
-    senha = forms.CharField()
-
 class AutorForm(forms.ModelForm):
     # def __init__(self, *args, **kwargs):
     #     super().__init__(*args, **kwargs)

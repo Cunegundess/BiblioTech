@@ -9,6 +9,8 @@ from .serializers import *
 from datetime import datetime
 from .utils import converter_dataAutor
 from django.http import JsonResponse
+from rest_framework.decorators import api_view
+from django.contrib.auth.models import User
 
 
 def routesList(request):
@@ -40,6 +42,13 @@ class UserViewset(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
     serializer_class = UserSerializer
     queryset = get_user_model().objects.all()
+
+
+@api_view(['GET'])
+def usuarios(request):
+    usuarios = User.objects.all()
+    serializer = UserSerializer(usuarios, many=True)  # Crie um serializer para os usuários
+    return Response(serializer.data)
 
 
 class AlunosView(APIView):

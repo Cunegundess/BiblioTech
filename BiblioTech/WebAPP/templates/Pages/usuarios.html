@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="row flex-nowrap">
+            <div class="col-auto bg-light">
+                {% include '../Components/sideNav.html' %}
+            </div>
+
+            <div class="col p-4">
+                {% block inner_content %}
+                {% include '../Components/header.html' with titulo="Usuários cadastrados" %}
+                <div class="card shadow-lg h-75 mt-5">
+                    <div class="card-header d-flex align-items-center justify-content-between">
+                        <div class="d-flex align-items-center">
+                            <button type="button" class="btn bg-primary text-light me-2" data-bs-toggle="modal" data-bs-target="#filtro">
+                                <i class="bi-funnel-fill"></i>
+                            </button>
+                        </div>
+                        <button type="button" class="btn bg-primary text-light" data-bs-toggle="modal" data-bs-target="#formUsuario">
+                                <i class="bi bi-person-plus-fill"></i>
+                        </button>
+                        {% include '../Components/forms/formUsuario.html' %}
+                    </div>
+                    <div class="card-body text-center">
+                        {% include '../Components/tables/tableUsuario.html' with titulo="Usuarios" %}
+                    </div>
+                </div>
+
+                <div class="my-4">
+                    {% include '../Components/pagination.html' with page_obj=usuarios %}
+                </div>
+                {% endblock inner_content %}
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="filtro" tabindex="-1" aria-labelledby="filtro" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="filtrolabel">Filtrar</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+              <div class="modal-body text-start">
+                  {% include '../Components/filtro.html' %}
+              </div> 
+          </div>
+        </div>
+      </div>
+{% endblock %}

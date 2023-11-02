@@ -44,13 +44,15 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'API',
     'WebAPP',
+    'Accounts',
     'rest_framework',
     'bootstrap5',
     'crispy_forms',
     'crispy_bootstrap5',
     'django_filters',
     'rest_framework_simplejwt',
-    'rest_framework.authtoken'
+    'rest_framework.authtoken',
+    'corsheaders'
 ]
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
@@ -65,7 +67,13 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'django.middleware.locale.LocaleMiddleware'
+    'django.middleware.locale.LocaleMiddleware',
+    'corsheaders.middleware.CorsMiddleware'
+]
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:8000",
+    "http://127.0.0.1:8000"
 ]
 
 ROOT_URLCONF = 'Config.urls'
@@ -183,6 +191,8 @@ STATICFILES_DIRS = [
     BASE_DIR / "WebAPP/static"
 ]
 
-LOGIN_REDIRECT_URL = 'http://127.0.0.1:8000/home'
-LOGOUT_REDIRECT_URL = 'http://127.0.0.1:8000'
+LOGIN_REDIRECT_URL = 'http://localhost:8000/home'
+LOGOUT_REDIRECT_URL = 'http://localhost:8000'
+# LOGIN_REDIRECT_URL = 'http://127.0.0.1:8000/home'
+# LOGOUT_REDIRECT_URL = 'http://127.0.0.1:8000'
 

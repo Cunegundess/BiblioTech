@@ -1,0 +1,10 @@
+<li class="nav-item dropdown my-5">
+    <a href="#" class="nav-link align-items-center text-secondary d-flex dropdown-toggle" id="dropdownConfiguracoes" data-bs-toggle="dropdown" aria-expanded="false">
+        <i class="fs-4 bi bi-gear-fill"></i><span class="ms-2 d-none d-sm-inline">Configurações</span>
+    </a>
+
+    <ul id="configModal" class="dropdown-menu dropdown-menu-dark text-small shadow">
+        <li><a class="dropdown-item" href="{% url 'cadastrarCurso' %}">Cadastrar Curso</a></li>
+        {% comment %} <li><a class="dropdown-item" href="{% url 'cadastrarUsuario' %}">Cadastrar Usuário</a></li> {% endcomment %}
+    </ul>                   
+</li>

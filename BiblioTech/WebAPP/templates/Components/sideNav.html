@@ -38,16 +38,8 @@
                         <i class="fs-4 bi-card-checklist"></i><span class="ms-2 d-none d-sm-inline">Empréstimos</span>
                     </a>
                 </li>
-                <li class="nav-item dropdown my-5">
-                    <button href="#" class="nav-link align-items-center text-secondary d-flex dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="fs-4 bi bi-gear-fill"></i><span class="ms-2 d-none d-sm-inline">Configurações</span>
-                    </button>
+            {% include '../Components/modals/configuracoes.html' %}
 
-                    <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
-                        <li><a class="dropdown-item" href="{% url 'cadastrarCurso' %}">Cadastrar Curso</a></li>
-                        <li><a class="dropdown-item" href="#">Cadastrar Usuário</a></li>
-                    </ul>                   
-                </li>
             </ul>
             {% include '../Components/modals/modalConta.html' %}
             

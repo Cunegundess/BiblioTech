@@ -1,0 +1,30 @@
+{% load crispy_forms_tags %}
+{% load static %}
+
+<div class="modal fade" id="formUsuario" tabindex="-1" aria-labelledby="formUsuario" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="usuarioFormLabel">Cadastrar Usuario</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+        <div class="modal-body text-start">
+        <form id="usuarioForm">
+          {% csrf_token %}
+          {{ form|crispy }}
+        </div>
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-primary">Salvar</button>
+        </div>
+        </form>
+    </div>
+  </div>
+</div>
+
+<style>
+    .asteriskField {
+        display: none;
+    }            
+</style>
+
+<script src="{% static 'js/usuarioPage.js' %}"></script>

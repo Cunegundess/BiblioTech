@@ -9,11 +9,11 @@ from rest_framework.routers import DefaultRouter
 
 app_name = 'API'
 
-
 urlpatterns = [
     path('', routesList, name='routes-list'),
 
     path('pesquisa/', pesquisa, name='pesquisa'),
+    path('usuarios/', usuarios, name='usuarios'),
 
     # JWT
     path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),

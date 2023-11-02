@@ -8,20 +8,25 @@
 <!-- Header-->
 <header class="py-5" style="background-image: url('{% static 'img/books6.jpg' %}'); background-size: 100%; background-position: center; height: 100vh;">
     <div class="container px-5 pb-5 h-100">
-        <div class="row gx-5 align-items-center h-100">
+        <div class="row gx-5 align-items-center align-items-sm-center align-items-xxl-center h-100">
             <div class="col-xxl-5">
                 <!-- Header text content-->
-                <div class="text-center text-xxl-start">
-                    <div class="fs-3 fw-regular">Onde cada página</div>
+                <div class="text-center text-sm-center text-xxl-center">
+                    <div class="fs-3 fw-medium">Onde cada página</div>
                     <h1 class="display-3 fw-bolder mb-5"><span class="text-gradient d-inline">É uma AVENTURA!</span></h1>
-                    <div class="d-grid d-sm-flex justify-content-sm-center justify-content-xxl-start mb-3">
-                        <a class="btn btn-primary btn-lg px-5 py-3 me-sm-3 fs-6 fw-bolder shadow-lg" href="/login">Entrar</a>
+                    <div class="d-flex justify-content-center justify-content-sm-center justify-content-xxl-center">
+                        <a class="btn btn-primary btn-lg px-5 py-3 me-sm-3 fs-6 fw-bolder shadow-lg" href="{% url 'Accounts:login' %}">Entrar</a>
+
+                        <a class="btn btn-light btn-lg px-5 py-3 me-sm-3 fs-6 fw-bolder shadow-lg" href="{% url 'Accounts:cadastro' %}">Cadastrar</a>
                     </div>
+
                 </div>
             </div>
         </div>
     </div>
 </header>
+
+<script src="{% static 'js/carregarImagem.js' %}"></script>
 
 {% include '../Components/footer.html' %}
 
