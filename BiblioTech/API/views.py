@@ -11,6 +11,7 @@ from .utils import converter_dataAutor
 from django.http import JsonResponse
 from rest_framework.decorators import api_view
 from django.contrib.auth.models import User
+from rest_framework.pagination import PageNumberPagination
 
 
 def routesList(request):
@@ -112,11 +113,20 @@ class AlunoView(APIView):
 
 
 class AutoresView(APIView):
-    queryset = Autor.objects.all()
+    queryset = Autor.objects.all().order_by("nome")
     serializer_class = AutorSerializer
+    pagination_class = PageNumberPagination
 
     def get(self, request):
-        serializer = self.serializer_class(self.queryset.all(), many=True)
+        autores = self.queryset
+        paginator = self.pagination_class()  # Instancia a classe de paginação
+        page = paginator.paginate_queryset(autores, request)  # Pagina os resultados
+
+        if page is not None:
+            serializer = AutorSerializer(page, many=True)
+            return paginator.get_paginated_response(serializer.data)
+
+        serializer = AutorSerializer(autores, many=True)
         return Response(serializer.data)
     
     def post(self, request):
@@ -149,6 +159,7 @@ class AutoresView(APIView):
             serializer.save()
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
 class AutorView(APIView):
 
     serializer_class = AutorSerializer

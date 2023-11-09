@@ -1,21 +1,20 @@
 $(document).ready(function() {
     function atualizarTabela() {
         $.ajax({
-            url: 'http://127.0.0.1:8000/api/autores/', // Substitua pela URL correta da sua API
+            url: url, 
             method: 'GET',
             dataType: 'json',
             success: function(data) {
-                var tabela = $('#tabela-autores tbody');
-                tabela.empty(); // Limpa a tabela
-
-                data.forEach(function(autor) {
+                var tabela = $('#tabela-editoras tbody');
+                tabela.empty(); 
+                data.results.forEach(function(editora) {
                     tabela.append(`
                         <tr>
-                            <td>${autor.nome}</td>
-                            <td>${autor.nacionalidade}</td>
-                            <td>${autor.data_nascimento}</td>
+                            <td>${editora.nome}</td>
+                            <td>${editora.endereco}</td>
+                            <td>${editora.telefone}</td>
                             <td>
-                                <button type="button" class="btn btn-sm bg-primary text-light">
+                                <button id="editButton" type="button" class="btn btn-sm bg-primary text-light" data-bs-toggle="modal" data-bs-target="#formEditora">
                                     <i class="bi bi-pencil-square me-1"></i>
                                     Editar
                                 </button>
@@ -23,7 +22,11 @@ $(document).ready(function() {
                         </tr>
                     `);
                 });
+            },
+            error: function(xhr, status, error) {
+                console.error(xhr.responseText);
             }
+            
         });
     }
 

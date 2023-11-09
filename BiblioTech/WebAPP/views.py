@@ -98,12 +98,12 @@ def autoresPage(request):
     page = request.GET.get('page')
     autores = paginator.get_page(page)
 
-    try:
-        autores = paginator.page(page)
-    except PageNotAnInteger:
-        autores = paginator.page(1)
-    except EmptyPage:
-        autores = paginator.page(paginator.num_pages)
+    # try:
+    #     autores = paginator.page(page)
+    # except PageNotAnInteger:
+    #     autores = paginator.page(1)
+    # except EmptyPage:
+    #     autores = paginator.page(paginator.num_pages)
     
     context = {'autores': autores, 'page_title': 'Autores', 'form': AutorForm, 'filtro': filtro}
     return render(request, 'Pages/autores.html', context)

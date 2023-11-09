@@ -4,10 +4,10 @@ function carregarPaginacao(url, paginaAtual) {
     $.ajax({
         url: url,
         method: 'GET',
-        dataType: 'json', // Alterado para JSON, assumindo que o backend retorna JSON
+        dataType: 'json',
         data: { page: paginaAtual },
         success: function(data) {
-            atualizarTabela(data);
+            atualizarTabela(data); // Certifique-se de que a função atualizarTabela esteja definida e funcional
         }
     });
 }
@@ -15,5 +15,6 @@ function carregarPaginacao(url, paginaAtual) {
 $('#pagination-container').on('click', '.page-link', function(e) {
     e.preventDefault();
     var url = $(this).attr('href'); // Obtém a URL da página clicada
-    carregarPaginacao(url);
+    var paginaAtual = url.split('=')[1]; // Obtém o número da página a partir da URL
+    carregarPaginacao(url, paginaAtual); // Passa a URL e o número da página para a função
 });

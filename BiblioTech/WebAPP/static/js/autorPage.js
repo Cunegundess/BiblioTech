@@ -1,21 +1,21 @@
 $(document).ready(function() {
+    const url = 'http://127.0.0.1:8000/api/autores/'
     function atualizarTabela() {
         $.ajax({
-            url: 'http://127.0.0.1:8000/api/autores/', // Substitua pela URL correta da sua API
+            url: url, 
             method: 'GET',
             dataType: 'json',
             success: function(data) {
                 var tabela = $('#tabela-autores tbody');
-                tabela.empty(); // Limpa a tabela
-
-                data.forEach(function(autor) {
+                tabela.empty(); 
+                data.results.forEach(function(autor) {
                     tabela.append(`
                         <tr>
                             <td>${autor.nome}</td>
                             <td>${autor.nacionalidade}</td>
                             <td>${autor.data_nascimento}</td>
                             <td>
-                                <button type="button" class="btn btn-sm bg-primary text-light">
+                                <button id="editButton" type="button" class="btn btn-sm bg-primary text-light" data-bs-toggle="modal" data-bs-target="#formEditora">
                                     <i class="bi bi-pencil-square me-1"></i>
                                     Editar
                                 </button>
@@ -23,7 +23,11 @@ $(document).ready(function() {
                         </tr>
                     `);
                 });
+            },
+            error: function(xhr, status, error) {
+                console.error(xhr.responseText);
             }
+            
         });
     }
 
@@ -42,7 +46,7 @@ $(document).ready(function() {
 
         $.ajax({
             type: 'POST',
-            url: 'http://127.0.0.1:8000/api/autores/', // Aqui está a URL de ação do formulário
+            url: url, // Aqui está a URL de ação do formulário
             data: $(this).serialize(),
             success: function(data){
                 // Aqui você pode adicionar código para lidar com a resposta bem-sucedida
