@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="row flex-nowrap">
+            <div class="col-auto bg-light">
+                {% include '../../Components/sideNav.html' %}
+            </div>
+
+            <div class="col p-4">
+                {% block inner_content %}
+                {% include '../../Components/header.html' with titulo=aluno.nome %}
+                {% include '../../Components/cards/cardAluno.html' %}
+                {% endblock inner_content %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

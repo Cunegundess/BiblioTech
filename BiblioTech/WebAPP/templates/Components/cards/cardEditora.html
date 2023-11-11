@@ -1,20 +1,26 @@
-<div class="card shadow-lg h-75 mt-5">
-    <div class="row g-0">
-        <div class="card-header text-center">
-            {% comment %} <h5 class="card-title">{{ card_title }}</h5> {% endcomment %}
-        </div>
-        <div class="col-md-4">
-            <img src="..." class="img-fluid rounded-start" alt="...">
-        </div>
-        <div class="col-md-8">
-            <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
-            </div>
-        </div>
+{% load crispy_forms_tags %}
+{% load static %}
+
+<div class="card shadow-lg">
+    <div class="card-header text-center">
     </div>
-    <div class="card-footer text-center">
-        <a href="#" class="">Go somewhere</a>
+    <div class="card-body">
+    <form id="editarEditoraForm" method="POST" action="{% url 'editarEditora' editora.id %}">
+          {% csrf_token %}
+          {{ form|crispy }}
     </div>
+    <div class="card-footer text-center d-flex justify-content-between">
+        <button id="excluirEditoraBtn" form="EditoraForm" type="submit" class="btn btn-danger" onclick="excluirEditora(event, '{% url "editarEditora" editora.id %}')">Deletar</button>
+        <button id="salvarEditoraBtn" form="EditoraForm" type="submit" class="btn btn-primary" onclick="salvarEditora(event, '{% url "editarEditora" editora.id %}')">Salvar</button>
+    </div>
+    </form>
 </div>
+
+<style>
+    .asteriskField {
+        display: none;
+    }            
+</style>
+
+<script src="{% static 'js/edit/editarEditora.js' %}"></script>
+<script src="{% static 'js/validacoes/validacoes.js' %}"></script>

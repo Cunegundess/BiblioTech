@@ -5,13 +5,13 @@
     <div class="container-fluid">
         <div class="row flex-nowrap">
             <div class="col-auto bg-light">
-                {% include '../Components/sideNav.html' %}
+                {% include '../../Components/sideNav.html' %}
             </div>
 
             <div class="col p-4">
                 {% block inner_content %}
-                {% include '../Components/header.html' with titulo="Editora" %}
-                {% include '../Components/cards/cardEditora.html' %}
+                {% include '../../Components/header.html' with titulo=editora.nome %}
+                {% include '../../Components/cards/cardEditora.html' %}
                 {% endblock inner_content %}
             </div>
         </div>

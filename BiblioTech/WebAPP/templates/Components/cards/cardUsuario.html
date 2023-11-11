@@ -1,0 +1,26 @@
+{% load crispy_forms_tags %}
+{% load static %}
+
+<div class="card shadow-lg">
+    <div class="card-header text-center">
+    </div>
+    <div class="card-body">
+    <form id="editarUsuarioForm" method="POST" action="{% url 'editarUsuario' usuario.id %}">
+          {% csrf_token %}
+          {{ form|crispy }}
+    </div>
+    <div class="card-footer text-center d-flex justify-content-between">
+        <button id="excluirUsuarioBtn" form="UsuarioForm" type="submit" class="btn btn-danger" onclick="excluirUsuario(event, '{% url "editarUsuario" usuario.id %}')">Deletar</button>
+        <button id="salvarUsuarioBtn" form="UsuarioForm" type="submit" class="btn btn-primary" onclick="salvarUsuario(event, '{% url "editarUsuario" usuario.id %}')">Salvar</button>
+    </div>
+    </form>
+</div>
+
+<style>
+    .asteriskField {
+        display: none;
+    }            
+</style>
+
+<script src="{% static 'js/edit/editarUsuario.js' %}"></script>
+<script src="{% static 'js/validacoes/validacoes.js' %}"></script>

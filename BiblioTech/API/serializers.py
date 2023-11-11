@@ -1,3 +1,4 @@
+from datetime import datetime
 from rest_framework import serializers
 from django.contrib.auth import get_user_model
 from .models import *
@@ -35,6 +36,7 @@ class AlunoSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class EmprestimoSerializer(serializers.ModelSerializer):
+
     class Meta:
         model = Emprestimo
         fields = '__all__'

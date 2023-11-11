@@ -12,6 +12,7 @@ from django.http import JsonResponse
 from rest_framework.decorators import api_view
 from django.contrib.auth.models import User
 from rest_framework.pagination import PageNumberPagination
+from rest_framework.permissions import DjangoModelPermissionsOrAnonReadOnly
 
 
 def routesList(request):
@@ -53,11 +54,20 @@ def usuarios(request):
 
 
 class AlunosView(APIView):
-    queryset = Aluno.objects.all()
+    queryset = Aluno.objects.all().order_by("nome")
     serializer_class = AlunoSerializer
+    pagination_class = PageNumberPagination
 
     def get(self, request):
-        serializer = self.serializer_class(self.queryset.all(), many=True)
+        alunos = self.queryset
+        paginator = self.pagination_class()  # Instancia a classe de paginação
+        page = paginator.paginate_queryset(alunos, request)  # Pagina os resultados
+
+        if page is not None:
+            serializer = AlunoSerializer(page, many=True)
+            return paginator.get_paginated_response(serializer.data)
+
+        serializer = AlunoSerializer(alunos, many=True)
         return Response(serializer.data)
     
     def post(self, request):
@@ -78,14 +88,23 @@ class AlunosView(APIView):
             serializer.save()
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)    
+
+
 class AlunoView(APIView):
     serializer_class = AlunoSerializer
+    queryset = Aluno.objects.all()  # Adicione esta linha
 
+    permission_classes = [DjangoModelPermissionsOrAnonReadOnly]
+
+    def get_queryset(self):
+        return Aluno.objects.all()
+    
     def get_object(self, pk):
         try:
             return Aluno.objects.get(pk=pk)
         except Aluno.DoesNotExist:
             return None
+        
 
     def get(self, request, pk):
         aluno = self.get_object(pk)
@@ -160,9 +179,15 @@ class AutoresView(APIView):
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
-class AutorView(APIView):
 
+class AutorView(APIView):
     serializer_class = AutorSerializer
+    queryset = Autor.objects.all()  # Adicione esta linha
+
+    permission_classes = [DjangoModelPermissionsOrAnonReadOnly]
+
+    def get_queryset(self):
+        return Autor.objects.all()
 
     def get_object(self, pk):
         try:
@@ -193,12 +218,23 @@ class AutorView(APIView):
             autor.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
         return Response(status=status.HTTP_404_NOT_FOUND)
+
+
 class EditorasView(APIView):
-    queryset = Editora.objects.all()
+    queryset = Editora.objects.all().order_by("nome")
     serializer_class = EditoraSerializer
+    pagination_class = PageNumberPagination
 
     def get(self, request):
-        serializer = self.serializer_class(self.queryset.all(), many=True)
+        editoras = self.queryset
+        paginator = self.pagination_class()  # Instancia a classe de paginação
+        page = paginator.paginate_queryset(editoras, request)  # Pagina os resultados
+
+        if page is not None:
+            serializer = EditoraSerializer(page, many=True)
+            return paginator.get_paginated_response(serializer.data)
+
+        serializer = EditoraSerializer(editoras, many=True)
         return Response(serializer.data)
     
     def post(self, request):
@@ -219,8 +255,16 @@ class EditorasView(APIView):
             serializer.save()
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)    
+
+
 class EditoraView(APIView):
     serializer_class = EditoraSerializer
+    queryset = Editora.objects.all()  # Adicione esta linha
+
+    permission_classes = [DjangoModelPermissionsOrAnonReadOnly]
+
+    def get_queryset(self):
+        return Editora.objects.all()
 
     def get_object(self, pk):
         try:
@@ -251,12 +295,23 @@ class EditoraView(APIView):
             editora.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
         return Response(status=status.HTTP_404_NOT_FOUND)
+
+
 class LivrosView(APIView):
-    queryset = Livro.objects.all()
+    queryset = Livro.objects.all().order_by("titulo")
     serializer_class = LivroSerializer
+    pagination_class = PageNumberPagination
 
     def get(self, request):
-        serializer = self.serializer_class(self.queryset.all(), many=True)
+        livros = self.queryset
+        paginator = self.pagination_class()  # Instancia a classe de paginação
+        page = paginator.paginate_queryset(livros, request)  # Pagina os resultados
+
+        if page is not None:
+            serializer = LivroSerializer(page, many=True)
+            return paginator.get_paginated_response(serializer.data)
+
+        serializer = LivroSerializer(livros, many=True)
         return Response(serializer.data)
     
     def post(self, request):
@@ -277,8 +332,16 @@ class LivrosView(APIView):
             serializer.save()
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
 class LivroView(APIView):
     serializer_class = LivroSerializer
+    queryset = Livro.objects.all()  # Adicione esta linha
+
+    permission_classes = [DjangoModelPermissionsOrAnonReadOnly]
+
+    def get_queryset(self):
+        return Livro.objects.all()
 
     def get_object(self, pk):
         try:
@@ -309,12 +372,24 @@ class LivroView(APIView):
             livro.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
         return Response(status=status.HTTP_404_NOT_FOUND)
+
+
 class EmprestimosView(APIView):
-    queryset = Emprestimo.objects.all()
+    queryset = Emprestimo.objects.all().order_by("livro")
     serializer_class = EmprestimoSerializer
+    pagination_class = PageNumberPagination
+    
 
     def get(self, request):
-        serializer = self.serializer_class(self.queryset.all(), many=True)
+        emprestimos = self.queryset
+        paginator = self.pagination_class()  # Instancia a classe de paginação
+        page = paginator.paginate_queryset(emprestimos, request)  # Pagina os resultados
+
+        if page is not None:
+            serializer = EmprestimoSerializer(page, many=True)
+            return paginator.get_paginated_response(serializer.data)
+
+        serializer = EmprestimoSerializer(emprestimos, many=True)
         return Response(serializer.data)
     
     def post(self, request):
@@ -335,8 +410,16 @@ class EmprestimosView(APIView):
             serializer.save()
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)    
+
+
 class EmprestimoView(APIView):
-    serializer_class = AlunoSerializer
+    serializer_class = EmprestimoSerializer
+    queryset = Emprestimo.objects.all()  # Adicione esta linha
+
+    permission_classes = [DjangoModelPermissionsOrAnonReadOnly]
+
+    def get_queryset(self):
+        return Emprestimo.objects.all()
 
     def get_object(self, pk):
         try:
@@ -367,6 +450,8 @@ class EmprestimoView(APIView):
             emprestimo.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
         return Response(status=status.HTTP_404_NOT_FOUND)
+
+
 class DevolucoesView(APIView):
     queryset = Devolucao.objects.all()
     serializer_class = DevolucaoSerializer
@@ -393,9 +478,16 @@ class DevolucoesView(APIView):
             serializer.save()
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-class DevolucaoView(APIView):
 
+
+class DevolucaoView(APIView):
     serializer_class = DevolucaoSerializer
+    queryset = Devolucao.objects.all()  # Adicione esta linha
+
+    permission_classes = [DjangoModelPermissionsOrAnonReadOnly]
+
+    def get_queryset(self):
+        return Devolucao.objects.all()
 
     def get_object(self, pk):
         try:
@@ -426,6 +518,8 @@ class DevolucaoView(APIView):
             devolucao.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
         return Response(status=status.HTTP_404_NOT_FOUND)
+
+
 class DetalhesLivrosView(APIView):
     queryset = DetalhesLivro.objects.all()
     serializer_class = DetalhesLivroSerializer
@@ -456,6 +550,12 @@ class DetalhesLivrosView(APIView):
 
 class DetalhesLivroView(APIView):
     serializer_class = DetalhesLivroSerializer
+    queryset = DetalhesLivro.objects.all()  # Adicione esta linha
+
+    permission_classes = [DjangoModelPermissionsOrAnonReadOnly]
+
+    def get_queryset(self):
+        return DetalhesLivro.objects.all()
 
     def get_object(self, pk):
         try:
@@ -518,6 +618,12 @@ class GeneroLivrosView(APIView):
 
 class GeneroLivroView(APIView):
     serializer_class = DetalhesLivroSerializer
+    queryset = GeneroLivro.objects.all()  # Adicione esta linha
+
+    permission_classes = [DjangoModelPermissionsOrAnonReadOnly]
+
+    def get_queryset(self):
+        return GeneroLivro.objects.all()
 
     def get_object(self, pk):
         try:
@@ -551,11 +657,20 @@ class GeneroLivroView(APIView):
     
 
 class CursosView(APIView):
-    queryset = Curso.objects.all()
+    queryset = Curso.objects.all().order_by("nome")
     serializer_class = CursoSerializer
+    pagination_class = PageNumberPagination
 
     def get(self, request):
-        serializer = self.serializer_class(self.queryset.all(), many=True)
+        cursos = self.queryset
+        paginator = self.pagination_class()  # Instancia a classe de paginação
+        page = paginator.paginate_queryset(cursos, request)  # Pagina os resultados
+
+        if page is not None:
+            serializer = CursoSerializer(page, many=True)
+            return paginator.get_paginated_response(serializer.data)
+
+        serializer = CursoSerializer(cursos, many=True)
         return Response(serializer.data)
     
     def post(self, request):
@@ -580,6 +695,12 @@ class CursosView(APIView):
 
 class CursoView(APIView):
     serializer_class = CursoSerializer
+    queryset = Curso.objects.all()  # Adicione esta linha
+
+    permission_classes = [DjangoModelPermissionsOrAnonReadOnly]
+
+    def get_queryset(self):
+        return Curso.objects.all()
 
     def get_object(self, pk):
         try:

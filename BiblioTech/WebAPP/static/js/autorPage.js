@@ -1,5 +1,6 @@
 $(document).ready(function() {
     const url = 'http://127.0.0.1:8000/api/autores/'
+
     function atualizarTabela() {
         $.ajax({
             url: url, 
@@ -8,6 +9,7 @@ $(document).ready(function() {
             success: function(data) {
                 var tabela = $('#tabela-autores tbody');
                 tabela.empty(); 
+                
                 data.results.forEach(function(autor) {
                     tabela.append(`
                         <tr>
@@ -15,10 +17,10 @@ $(document).ready(function() {
                             <td>${autor.nacionalidade}</td>
                             <td>${autor.data_nascimento}</td>
                             <td>
-                                <button id="editButton" type="button" class="btn btn-sm bg-primary text-light" data-bs-toggle="modal" data-bs-target="#formEditora">
+                                <a class="btn btn-sm bg-primary text-light" href="http://127.0.0.1:8000/home/autores/${autor.id}">
                                     <i class="bi bi-pencil-square me-1"></i>
                                     Editar
-                                </button>
+                                </a>
                             </td>
                         </tr>
                     `);

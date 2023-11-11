@@ -1,32 +1,26 @@
-<div class="card shadow-lg h-100">
+{% load crispy_forms_tags %}
+{% load static %}
+
+<div class="card shadow-lg">
     <div class="card-header text-center">
-        <h5 class="card-title">Empréstimos</h5>
     </div>
-    <div class="card-body text-center">
-        <table class="table table-hover">
-            <thead class="">
-                <tr>
-                    <th scope="col">Aluno</th>
-                    <th scope="col">Livro</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for emprestimo in emprestimos %}
-                <tr>
-                    <td>{{ emprestimo.aluno }}</td>
-                    <td>{{ emprestimo.livro }}</td>
-                    <td>
-                        <button type="button" class="btn btn-sm bg-primary text-light">
-                            <i class="bi bi-pencil-square me-1"></i>
-                            Editar
-                        </button>
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+    <div class="card-body">
+    <form id="editarEmprestimoForm" method="POST" action="{% url 'editarEmprestimo' emprestimo.id %}">
+          {% csrf_token %}
+          {{ form|crispy }}
     </div>
-    <div class="card-footer text-center">
-        <a href="{% url 'emprestimosPage' %}">Ver mais</a>
+    <div class="card-footer text-center d-flex justify-content-between">
+        <button id="excluirEmprestimoBtn" form="EmprestimoForm" type="submit" class="btn btn-danger" onclick="excluirEmprestimo(event, '{% url "editarEmprestimo" emprestimo.id %}')">Deletar</button>
+        <button id="salvarEmprestimoBtn" form="EmprestimoForm" type="submit" class="btn btn-primary" onclick="salvarEmprestimo(event, '{% url "editarEmprestimo" emprestimo.id %}')">Salvar</button>
     </div>
+    </form>
 </div>
+
+<style>
+    .asteriskField {
+        display: none;
+    }            
+</style>
+
+<script src="{% static 'js/edit/editarEmprestimo.js' %}"></script>
+<script src="{% static 'js/validacoes/validacoes.js' %}"></script>

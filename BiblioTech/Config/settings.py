@@ -186,6 +186,10 @@ REST_FRAMEWORK = {
     ]
 }
 
+DATE_INPUT_FORMATS = [
+    '%d-%m-%Y', '%d/%m/%Y', '%d/%m/%y'
+]
+
 STATICFILES_DIRS = [
     # BASE_DIR / "static",
     BASE_DIR / "WebAPP/static"

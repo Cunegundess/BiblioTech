@@ -1,7 +1,7 @@
 from django import forms
 from django.urls import reverse_lazy
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Submit
+from crispy_forms.layout import Submit, Layout
 from API.models import Autor, Editora, Livro, GeneroLivro, Curso, Aluno, Emprestimo, Devolucao, DetalhesLivro
 
 class AutorForm(forms.ModelForm):
@@ -65,14 +65,21 @@ class CursoForm(forms.ModelForm):
         fields = ['nome', 'setor', 'semestres']
 
 class AlunoForm(forms.ModelForm):
+    class Meta:
+        model = Aluno
+        fields = ['nome', 'email', 'senha', 'contato', 'ra', 'curso']
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper(self)
-
-    class Meta:
-        model = Aluno
-        fields = ['nome', 'email', 'senha', 'contato', 'ra', 'curso']
+        self.helper.layout = Layout(
+            'nome',
+            'email',
+            'senha',
+            'contato',
+            'ra',
+            'curso'
+        )
 
 class EmprestimoForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
@@ -84,7 +91,7 @@ class EmprestimoForm(forms.ModelForm):
 
     class Meta:
         model = Emprestimo
-        fields = ['livro', 'aluno', 'data_devolucao']
+        fields = ['nome', 'livro', 'aluno', 'data_emprestimo', 'data_devolucao']
 
 class DevolucaoForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):

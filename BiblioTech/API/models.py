@@ -50,9 +50,10 @@ class Aluno(models.Model):
         return self.nome
 
 class Emprestimo(models.Model):
+    nome = models.CharField(max_length=100, default="NomeEmprestimo", null=True)
     livro = models.ForeignKey(Livro, on_delete=models.CASCADE)
     aluno = models.ForeignKey(Aluno, on_delete=models.CASCADE)
-    data_emprestimo = models.DateField(auto_now_add=True)
+    data_emprestimo = models.DateField()
     data_devolucao = models.DateField()
 
     def __str__(self):
