@@ -1,10 +1,19 @@
 $(document).ready(function() {
     const url = 'http://127.0.0.1:8000/api/emprestimos/'
+    const token = "44992d5cf025fc6881b123025edf4a0778435697"
+
+    function formatarData(data) {
+        return moment(data).format('DD/MM/YYYY');
+    }
 
     function atualizarTabela() {
         $.ajax({
             url: url,  // Substitua pela URL correta da sua API
             method: 'GET',
+            headers: {
+                'Authorization': `Token ${token}`,
+                'Content-Type': 'application/json',
+            },
             dataType: 'json',
             success: function(data) {
                 var tabela = $('#tabela-emprestimos tbody');
@@ -14,9 +23,9 @@ $(document).ready(function() {
                     tabela.append(`
                         <tr>
                             <td>${emprestimo.nome}</td>
-                            <td>${emprestimo.aluno}</td>
-                            <td>${emprestimo.livro}</td>
-                            <td>${emprestimo.data_emprestimo}</td>
+                            <td>${emprestimo.aluno.nome}</td>
+                            <td>${emprestimo.livro.titulo}</td>
+                            <td>${formatarData(emprestimo.data_emprestimo)}</td>
                             <td>
                                 <a class="btn btn-sm bg-primary text-light" href="http://127.0.0.1:8000/home/emprestimos/${emprestimo.id}">
                                     <i class="bi bi-pencil-square me-1"></i>
@@ -46,6 +55,10 @@ $(document).ready(function() {
         $.ajax({
             type: 'POST',
             url: url, // Aqui está a URL de ação do formulário
+            headers: {
+                'Authorization': `Token ${token}`,
+                'Content-Type': 'application/json',
+            },
             data: $(this).serialize(),
             success: function(data){
                 // Aqui você pode adicionar código para lidar com a resposta bem-sucedida
@@ -53,9 +66,9 @@ $(document).ready(function() {
                 atualizarTabela(); // Atualiza a tabela com os novos dados
                 fecharModal(); // Fecha o modal após o sucesso da requisição
             },
-            error: function(data){
-                // Aqui você pode adicionar código para lidar com erros
-                console.log(data);
+            error: function (xhr) {
+                console.log('Código de Status:', xhr.status);
+                console.log('Resposta:', xhr.responseText);
             },
             complete: function() {
                 // Reabilita o botão de envio do formulário após a requisição

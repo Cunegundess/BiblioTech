@@ -1,9 +1,9 @@
 // Seletor jQuery para os campos do formulário
-const nomeInput = $('#div_id_nome');
-const emailInput = $('#div_id_email');
-const senhaInput = $('#div_id_senha');
-const contatoInput = $('#div_id_contato');
-const raInput = $('#div_id_ra');
+const nomeInput = $('#id_nome');
+const emailInput = $('#id_email');
+const senhaInput = $('#id_senha');
+const contatoInput = $('#id_contato');
+const raInput = $('#id_ra');
 
 // Seletor jQuery para a div de mensagens de erro
 const errorMessages = $('#error-messages');
@@ -39,6 +39,9 @@ senhaInput.on('input', function () {
 $('#id_contato').inputmask('(99) 99999-9999', { placeholder: ' ' });
 $('#id_data_emprestimo').inputmask('99/99/9999', { placeholder: ' ' });
 $('#id_data_devolucao').inputmask('99/99/9999', { placeholder: ' ' });
+// $('#id_isbn').inputmask('999-9-99999-9999-9', {
+//     placeholder: ' ',
+// });
 
 
 raInput.on('input', function () {

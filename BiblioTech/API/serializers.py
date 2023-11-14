@@ -21,6 +21,8 @@ class EditoraSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class LivroSerializer(serializers.ModelSerializer):
+    autor = AutorSerializer()
+
     class Meta:
         model = Livro
         fields = '__all__'
@@ -30,29 +32,39 @@ class GeneroLivroSerializer(serializers.ModelSerializer):
         model = GeneroLivro
         fields = '__all__'
 
-class AlunoSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Aluno
-        fields = '__all__'
 
-class EmprestimoSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = Emprestimo
-        fields = '__all__'
 
 class DevolucaoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Devolucao
         fields = '__all__'
 
-class DetalhesLivroSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = DetalhesLivro
-        fields = '__all__'
 
 class CursoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Curso
         fields = '__all__'
+
+
+class AlunoSerializer(serializers.ModelSerializer):
+    curso = CursoSerializer()
+
+    class Meta:
+        model = Aluno
+        fields = '__all__'
+
+class EmprestimoSerializer(serializers.ModelSerializer):
+    aluno = AlunoSerializer()
+    livro = LivroSerializer()
+
+    class Meta:
+        model = Emprestimo
+        fields = '__all__'
+
+        
+class DetalhesLivroSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = DetalhesLivro
+        fields = '__all__'
+
 

@@ -15,7 +15,7 @@ $(document).ready(function() {
                         <tr>
                             <td>${aluno.nome}</td>
                             <td>${aluno.ra}</td>
-                            <td>${aluno.curso}</td>
+                            <td>${aluno.curso.nome}</td>
                             <td>
                                 <a class="btn btn-sm bg-primary text-light" href="http://127.0.0.1:8000/home/alunos/${aluno.id}">
                                     <i class="bi bi-pencil-square me-1"></i>
