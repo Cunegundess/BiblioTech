@@ -1,7 +1,6 @@
 $(document).ready(function() {
-    console.log("Script carregado")
-    
     $('#loginForm').submit(function(e) {
+        e.preventDefault(); // Impede o comportamento padrão do formulário
     
         // Obtenha os valores do formulário
         var username = $('#id_username').val();
@@ -18,7 +17,7 @@ $(document).ready(function() {
           success: function(response) {
             // Armazene o token JWT no localStorage após um login bem-sucedido
             var token = response.access; // Supondo que a resposta contenha um campo 'access' com o token JWT
-            sessionStorage.setItem('jwtToken', token);
+            localStorage.setItem('jwtToken', token);
     
             // Redirecione ou realize outras ações após o login bem-sucedido
             console.log('Login bem-sucedido! Token JWT:', token);
@@ -27,5 +26,5 @@ $(document).ready(function() {
             console.error('Erro ao tentar fazer login:', error);
           }
         });
+      });
     });
-});

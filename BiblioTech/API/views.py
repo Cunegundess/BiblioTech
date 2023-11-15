@@ -7,7 +7,7 @@ from django.contrib.auth import get_user_model
 from .models import *
 from .serializers import *
 from datetime import datetime
-from .utils import converter_dataAutor
+from .utils import converter_dataNascimento, converter_dataEmprestimo, converter_dataDevolucao
 from django.http import JsonResponse
 from rest_framework.decorators import api_view
 from django.contrib.auth.models import User
@@ -153,7 +153,7 @@ class AutoresView(APIView):
         dados_editaveis = request.data.copy()
 
         data_nascimento_str = dados_editaveis.get('data_nascimento')
-        data_nascimento = converter_dataAutor(data_nascimento_str)
+        data_nascimento = converter_dataNascimento(data_nascimento_str)
 
         if data_nascimento is not None:
             dados_editaveis['data_nascimento'] = data_nascimento
@@ -378,6 +378,7 @@ class EmprestimosView(APIView):
     queryset = Emprestimo.objects.all().order_by("livro")
     serializer_class = EmprestimoSerializer
     pagination_class = PageNumberPagination
+    permission_classes = [IsAuthenticated]
     
 
     def get(self, request):
@@ -393,11 +394,32 @@ class EmprestimosView(APIView):
         return Response(serializer.data)
     
     def post(self, request):
-        serializer = self.serializer_class(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+        dados_editaveis = request.data.copy()
+
+        data_emprestimo_str = dados_editaveis.get('data_emprestimo')
+        data_emprestimo = converter_dataEmprestimo(data_emprestimo_str)
+        data_devolucao_str = dados_editaveis.get('data_devolucao')
+        data_devolucao = converter_dataDevolucao(data_devolucao_str)
+
+        if data_emprestimo and data_devolucao is not None:
+            dados_editaveis['data_emprestimo'] = data_emprestimo
+            dados_editaveis['data_devolucao'] = data_devolucao
+
+            serializer = self.serializer_class(data=dados_editaveis)
+            if serializer.is_valid():
+                serializer.save()
+                return Response(serializer.data, status=status.HTTP_201_CREATED)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        else:
+            return Response({'error': 'Formato de data inválido'}, status=status.HTTP_400_BAD_REQUEST)
+
+
+        # serializer = self.serializer_class(data=request.data)
+        # if serializer.is_valid():
+        #     serializer.save()
+        #     return Response(serializer.data, status=status.HTTP_201_CREATED)
+        # return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
     def put(self, request, pk):
         try:
@@ -416,7 +438,7 @@ class EmprestimoView(APIView):
     serializer_class = EmprestimoSerializer
     queryset = Emprestimo.objects.all()  # Adicione esta linha
 
-    permission_classes = [DjangoModelPermissionsOrAnonReadOnly]
+    permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
         return Emprestimo.objects.all()

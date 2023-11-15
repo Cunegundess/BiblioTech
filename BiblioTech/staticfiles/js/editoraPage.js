@@ -1,5 +1,10 @@
 $(document).ready(function() {
     const url = 'http://127.0.0.1:8000/api/editoras/'
+    function formatarTelefone(telefone) {
+        // Supondo que o telefone seja uma string de 10 dígitos
+        return telefone.replace(/(\d{2})(\d{4,5})(\d{4})/, '($1) $2-$3');
+    }
+    
     function atualizarTabela() {
         $.ajax({
             url: url, // Substitua pela URL correta da sua API
@@ -14,12 +19,12 @@ $(document).ready(function() {
                         <tr>
                             <td>${editora.nome}</td>
                             <td>${editora.endereco}</td>
-                            <td>${editora.telefone}</td>
+                            <td>${formatarTelefone(editora.telefone)}</td>
                             <td>
-                                <button id="editButton" type="button" class="btn btn-sm bg-primary text-light" data-bs-toggle="modal" data-bs-target="#formEditora">
+                                <a class="btn btn-sm bg-primary text-light" href="http://127.0.0.1:8000/home/editoras/${editora.id}">
                                     <i class="bi bi-pencil-square me-1"></i>
                                     Editar
-                                </button>
+                                </a>
                             </td>
                         </tr>
                     `);

@@ -15,7 +15,7 @@
             {% include '../Components/returnButton.html' %}
         </div>
 
-        <form method="post" class="m-5 w-50 vh-50 text-center" action="{% url 'login' %}">
+        <form id="loginForm" method="post" class="m-5 w-50 vh-50 text-center" action="{% url 'login' %}">
             <h1 class="text-primary mb-4">Bem vindo de volta!</h1>
             {% csrf_token %}
             {{ form|crispy }}
@@ -35,5 +35,7 @@
         </style>
         
     {% endblock %}
+
+<script src="{% static 'js/login.js' %}"></script>
 </body>
 </html>

@@ -21,7 +21,7 @@ class EditoraSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class LivroSerializer(serializers.ModelSerializer):
-    autor = AutorSerializer()
+    autor = serializers.CharField(source='autor.nome', read_only=True)
 
     class Meta:
         model = Livro
@@ -47,15 +47,15 @@ class CursoSerializer(serializers.ModelSerializer):
 
 
 class AlunoSerializer(serializers.ModelSerializer):
-    curso = CursoSerializer()
+    curso = serializers.CharField(source='curso.nome', read_only=True)
 
     class Meta:
         model = Aluno
         fields = '__all__'
 
 class EmprestimoSerializer(serializers.ModelSerializer):
-    aluno = AlunoSerializer()
-    livro = LivroSerializer()
+    aluno = serializers.CharField(source='aluno.nome', read_only=True)
+    livro = serializers.CharField(source='livro.titulo', read_only=True)
 
     class Meta:
         model = Emprestimo

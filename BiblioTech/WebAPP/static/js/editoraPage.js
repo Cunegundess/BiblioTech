@@ -63,30 +63,6 @@ $(document).ready(function() {
         });
     });
 
-    $('#tabela-editoras').on('click', '#editButton', function() {
-        var linha = $(this).closest('tr'); 
-        var nome = linha.find('td:eq(0)').text(); 
-        var endereco = linha.find('td:eq(1)').text(); 
-        var telefone = linha.find('td:eq(2)').text(); 
-
-        // Preenche o formulário de edição
-        $('#id_nome').val(nome);
-        $('#id_endereco').val(endereco);
-        $('#id_telefone').val(telefone);
-
-        // Muda o título do modal
-        $('#editoraFormLabel').text('Editar Editora');
-
-        // Adiciona o campo de CSRF ao formulário
-        $('#editoraForm').append('{% csrf_token %}');
-
-        // Adiciona um botão de exclusão ao formulário
-        $('#editoraForm .modal-footer').append('<button type="button" class="btn btn-danger" id="deleteButton">Excluir</button>');
-
-        // Define a URL de ação do formulário para a edição
-        $('#editoraForm').attr('action', url); // Substitua pela URL correta
-    });
-
     $('#editoraForm').on('click', '#deleteButton', function() {
         atualizarTabela();
         var editoraId = $('#id_id').val(); // Supondo que você tenha um campo de ID no formulário

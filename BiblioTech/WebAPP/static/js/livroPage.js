@@ -34,7 +34,7 @@ $(document).ready(function() {
                     tabela.append(`
                         <tr>
                             <td>${livro.titulo}</td>
-                            <td>${livro.autor.nome}</td>
+                            <td>${livro.autor}</td>
                             <td>${formatarISBN(livro.isbn)}</td>
                             <td>
                                 <a class="btn btn-sm bg-primary text-light" href="http://127.0.0.1:8000/home/livros/${livro.id}">

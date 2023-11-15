@@ -1,23 +1,31 @@
 $(document).ready(function() {
+    const url = 'http://127.0.0.1:8000/api/autores/'
+
+    function formatarData(data) {
+        return moment(data).format('DD/MM/YYYY');
+    }
+
+
     function atualizarTabela() {
         $.ajax({
             url: url, 
             method: 'GET',
             dataType: 'json',
             success: function(data) {
-                var tabela = $('#tabela-editoras tbody');
+                var tabela = $('#tabela-autores tbody');
                 tabela.empty(); 
-                data.results.forEach(function(editora) {
+                
+                data.results.forEach(function(autor) {
                     tabela.append(`
                         <tr>
-                            <td>${editora.nome}</td>
-                            <td>${editora.endereco}</td>
-                            <td>${editora.telefone}</td>
+                            <td>${autor.nome}</td>
+                            <td>${autor.nacionalidade}</td>
+                            <td>${formatarData(autor.data_nascimento)}</td>
                             <td>
-                                <button id="editButton" type="button" class="btn btn-sm bg-primary text-light" data-bs-toggle="modal" data-bs-target="#formEditora">
+                                <a class="btn btn-sm bg-primary text-light" href="http://127.0.0.1:8000/home/autores/${autor.id}">
                                     <i class="bi bi-pencil-square me-1"></i>
                                     Editar
-                                </button>
+                                </a>
                             </td>
                         </tr>
                     `);
@@ -45,7 +53,7 @@ $(document).ready(function() {
 
         $.ajax({
             type: 'POST',
-            url: 'http://127.0.0.1:8000/api/autores/', // Aqui está a URL de ação do formulário
+            url: url, // Aqui está a URL de ação do formulário
             data: $(this).serialize(),
             success: function(data){
                 // Aqui você pode adicionar código para lidar com a resposta bem-sucedida

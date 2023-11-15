@@ -1,24 +1,26 @@
 $(document).ready(function() {
+    const url = 'http://127.0.0.1:8000/api/alunos/'
+    
     function atualizarTabela() {
         $.ajax({
-            url: 'http://127.0.0.1:8000/api/alunos/', // Substitua pela URL correta da sua API
+            url: url, // Substitua pela URL correta da sua API
             method: 'GET',
             dataType: 'json',
             success: function(data) {
                 var tabela = $('#tabela-alunos tbody');
                 tabela.empty(); // Limpa a tabela
 
-                data.forEach(function(aluno) {
+                data.results.forEach(function(aluno) {
                     tabela.append(`
                         <tr>
                             <td>${aluno.nome}</td>
                             <td>${aluno.ra}</td>
-                            <td>${aluno.curso}</td>
+                            <td>${aluno.curso.nome}</td>
                             <td>
-                                <button type="button" class="btn btn-sm bg-primary text-light">
+                                <a class="btn btn-sm bg-primary text-light" href="http://127.0.0.1:8000/home/alunos/${aluno.id}">
                                     <i class="bi bi-pencil-square me-1"></i>
                                     Editar
-                                </button>
+                                </a>
                             </td>
                         </tr>
                     `);

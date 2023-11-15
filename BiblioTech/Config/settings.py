@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
+from datetime import timedelta
 from pathlib import Path
 from dotenv import load_dotenv
 import os
@@ -72,8 +73,8 @@ MIDDLEWARE = [
 ]
 
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:8000",
-    "http://127.0.0.1:8000"
+    "http://127.0.0.1:8000",
+    "http://localhost:8000"
 ]
 
 ROOT_URLCONF = 'Config.urls'
@@ -176,14 +177,33 @@ REST_FRAMEWORK = {
         'rest_framework.renderers.BrowsableAPIRenderer',
     ],
     'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.TokenAuthentication',
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
+        # 'rest_framework.authentication.TokenAuthentication',
+        # 'rest_framework_simplejwt.authentication.JWTAuthentication',
         'rest_framework.authentication.BasicAuthentication',
         'rest_framework.authentication.SessionAuthentication',
     ],
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
     ]
+}
+
+SIMPLE_JWT = {
+    # Tempo de vida dos tokens
+    "ACCESS_TOKEN_LIFETIME": timedelta(days=1),  # Tempo de vida do token de acesso
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=1),     # Tempo de vida do token de atualização (refresh)
+
+    # Algoritmo de assinatura e chave secreta
+    "ALGORITHM": "HS256",                          # Algoritmo de assinatura JWT
+    "SIGNING_KEY": "chave_secreta_aqui",           # Chave secreta para assinar os tokens
+
+    # Configurações de autenticação e reivindicações
+    "AUTH_HEADER_TYPES": ("Bearer",),              # Tipos de cabeçalho de autorização permitidos
+    "AUTH_HEADER_NAME": "Authorization",           # Nome do cabeçalho de autorização
+    "USER_ID_FIELD": "id",                         # Campo que identifica o usuário
+
+    # Serializadores
+    "TOKEN_OBTAIN_SERIALIZER": "rest_framework_simplejwt.serializers.TokenObtainPairSerializer",
+    "TOKEN_REFRESH_SERIALIZER": "rest_framework_simplejwt.serializers.TokenRefreshSerializer",
 }
 
 DATE_INPUT_FORMATS = [
@@ -195,8 +215,8 @@ STATICFILES_DIRS = [
     BASE_DIR / "WebAPP/static"
 ]
 
-LOGIN_REDIRECT_URL = 'http://localhost:8000/home'
-LOGOUT_REDIRECT_URL = 'http://localhost:8000'
+LOGIN_REDIRECT_URL = 'http://127.0.0.1:8000/home'
+LOGOUT_REDIRECT_URL = 'http://127.0.0.1:8000'
 # LOGIN_REDIRECT_URL = 'http://127.0.0.1:8000/home'
 # LOGOUT_REDIRECT_URL = 'http://127.0.0.1:8000'
 

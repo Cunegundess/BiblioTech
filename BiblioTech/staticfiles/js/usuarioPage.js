@@ -1,24 +1,25 @@
 $(document).ready(function() {
+    const url = 'http://127.0.0.1:8000/api/usuarios/'
     function atualizarTabela() {
         $.ajax({
-            url: 'http://127.0.0.1:8000/api/usuarios/', // Substitua pela URL correta da sua API
+            url: url, // Substitua pela URL correta da sua API
             method: 'GET',
             dataType: 'json',
             success: function(data) {
                 var tabela = $('#tabela-usuarios tbody');
                 tabela.empty(); // Limpa a tabela
 
-                data.forEach(function(usuario) {
+                data.results.forEach(function(usuario) {
                     tabela.append(`
                         <tr>
                             <td>${usuario.nome}</td>
                             <td>${usuario.ra}</td>
                             <td>${usuario.curso}</td>
                             <td>
-                                <button type="button" class="btn btn-sm bg-primary text-light">
+                                <a class="btn btn-sm bg-primary text-light" href="http://127.0.0.1:8000/home/usuarios/${usuario.id}">
                                     <i class="bi bi-pencil-square me-1"></i>
                                     Editar
-                                </button>
+                                </a>
                             </td>
                         </tr>
                     `);
@@ -42,7 +43,7 @@ $(document).ready(function() {
 
         $.ajax({
             type: 'POST',
-            url: 'http://127.0.0.1:8000/api/usuarios/', // Aqui está a URL de ação do formulário
+            url: url, // Aqui está a URL de ação do formulário
             data: $(this).serialize(),
             success: function(data){
                 // Aqui você pode adicionar código para lidar com a resposta bem-sucedida
