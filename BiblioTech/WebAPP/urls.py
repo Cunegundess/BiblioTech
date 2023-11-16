@@ -6,7 +6,7 @@ urlpatterns = [
     path('', views.bibliotechPage, name='bibliotechPage'),
 
     path('home/', views.homePage, name='homePage'),
-    path('home/pesquisa/', views.pesquisa, name='pesquisa'),
+    # path('home/pesquisa/', views.pesquisa, name='pesquisa'),
     path('home/alunos/', views.alunosPage, name='alunosPage'),
     path('home/alunos/<int:pk>', views.editarAluno, name='editarAluno'),
     path('home/livros/', views.livrosPage, name='livrosPage'),
@@ -19,6 +19,6 @@ urlpatterns = [
     path('home/editoras/<int:pk>/', views.editarEditora, name='editarEditora'),
     path('home/cursos', views.cursosPage, name='cursosPage'),
     path('home/curso/<int:pk>/', views.editarCurso, name='editarCurso'),
-    path('home/resultados_pesquisa/', views.resultados_pesquisa, name='resultados_pesquisa'),
+    path('home/resultados_pesquisa/', views.search_view, name='search_view'),
 
 ]

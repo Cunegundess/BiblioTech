@@ -188,10 +188,6 @@ REST_FRAMEWORK = {
 }
 
 SIMPLE_JWT = {
-    # Tempo de vida dos tokens
-    "ACCESS_TOKEN_LIFETIME": timedelta(days=1),  # Tempo de vida do token de acesso
-    "REFRESH_TOKEN_LIFETIME": timedelta(days=1),     # Tempo de vida do token de atualização (refresh)
-
     # Algoritmo de assinatura e chave secreta
     "ALGORITHM": "HS256",                          # Algoritmo de assinatura JWT
     "SIGNING_KEY": "chave_secreta_aqui",           # Chave secreta para assinar os tokens

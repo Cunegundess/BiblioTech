@@ -1,7 +1,7 @@
 import json
 from django.apps import apps
-from django.http import JsonResponse
-from django.shortcuts import get_object_or_404, render
+from django.http import HttpResponseBadRequest, JsonResponse
+from django.shortcuts import get_object_or_404, redirect, render
 from API.models import *
 # from django.contrib.auth.forms import UserCreationForm
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
@@ -10,6 +10,7 @@ from .utils import *
 from .filter import *
 from django.contrib.auth.decorators import login_required
 from Accounts.forms import *
+import requests
 
 
 # Create your views here.
@@ -311,7 +312,7 @@ def cursosPage(request):
     context = {'cursos': cursos, 'page_title': 'Cursos', 'form': CursoForm, 'filtro': filtro}
     return render(request, 'Pages/cursos.html', context)
 
-
+@login_required
 def editarCurso(request, pk):
     print(f"Received {request.method} request for Curso {pk}")
     curso = get_object_or_404(Curso, pk=pk)
@@ -343,69 +344,42 @@ def editarCurso(request, pk):
 
     return render(request, 'Pages/editPages/editarCurso.html', {'form': form, 'curso': curso})
 
+@login_required
+def search_view(request):
+    data = request.GET.get('data')  # Obtém os dados da consulta passados via parâmetro na URL
+    resultados = json.loads(data) if data else None  # Converte os dados de string JSON para Python dict
 
-# @login_required
-# def pesquisa(request):
-#     resultados = []
-
-#     if request.method == 'POST':
-#         form = PesquisaForm(request.POST)
-
-#         if form.is_valid():
-#             consulta = form.cleaned_data['consulta']
-#             resultados = pesquisar(consulta)
-#     else:
-#         form = PesquisaForm()
-
-#     context = {
-#         'form': form,
-#         'resultados': resultados,
-#     }
-
-#     return render(request, 'pesquisa.html', context)
-
-def pesquisa(request):
-    if 'consulta' in request.POST:
-        consulta = request.POST['consulta']
-        autores = Autor.objects.filter(nome__icontains=consulta)
-        livros = Livro.objects.filter(titulo__icontains=consulta)
-        # Adicione mais filtros para outros modelos, se necessário
-    else:
-        autores = Autor.objects.none()
-        livros = Livro.objects.none()
-
-    context = {
-        'autores': autores,
-        'livros': livros,
-        'consulta': consulta
+    # Defina os campos que você deseja excluir
+    campos_a_excluir = ['data_cadastro', 'email', 'senha', 'descricao']
+    modelo_singular = {
+        'livro',
+        'autor',
+        'editora',
+        'curso',
+        'aluno',
+        'emprestimo',
     }
+    ordem_campos = {
+    'livro': ['titulo', 'autor', 'isbn'],
+    'autor': ['nome', 'nacionalidade', 'data_nascimento'],
+    'editora': ['nome', 'endereco', 'contato'],
+    'curso': ['nome', 'area', 'semestre'],
+    'aluno': ['nome', 'ra', 'curso'],
+    'emprestimo': ['nome', 'aluno', 'livro', 'data_devolucao'],
+    # Adicione mais modelos e ordens de campos conforme necessário
+}
 
-    return render(request, 'resultadosPesquisa.html', context)
+    # Filtra os campos a serem exibidos nos resultados
+    resultados_filtrados = {}
+    if resultados:
+        for modelo, itens in resultados.items():
+            itens_filtrados = []
+            for item in itens:
+                item_filtrado = {campo: valor for campo, valor in item.items() if campo not in campos_a_excluir}
+                itens_filtrados.append(item_filtrado)
+            resultados_filtrados[modelo] = itens_filtrados
 
-def resultados_pesquisa(request):
-    consulta = request.GET.get('consulta')
+    return render(request, 'Pages/resultadosPesquisa.html', {'resultados': resultados_filtrados, 'campos_a_excluir': campos_a_excluir, 'modelo_singular': modelo_singular, 'ordem_campos': ordem_campos})
 
-    resultados_livros = Livro.objects.filter(titulo__icontains=consulta)
-    resultados_autores = Autor.objects.filter(nome__icontains=consulta)
-    resultados_editoras = Editora.objects.filter(nome__icontains=consulta)
-    resultados_generoLivros = GeneroLivro.objects.filter(titulo__icontains=consulta)
-    resultados_cursos = Curso.objects.filter(nome__icontains=consulta)
-    resultados_alunos = Aluno.objects.filter(nome__icontains=consulta)
-    resultados_emprestimos = Emprestimo.objects.filter(livro__icontains=consulta)
-    resultados_devolucao = Devolucao.objects.filter(emprestimo__icontains=consulta)
-    resultados_detalhesLivro = DetalhesLivro.objects.filter(autor__icontains=consulta)
 
-    # Combine os resultados conforme necessário
-    context = {
-        'livros': list(resultados_livros.values()),  # Converte para uma lista de dicionários
-        'autores': list(resultados_autores.values()),
-        'editoras': list(resultados_editoras.values()),
-        'generoLivros': list(resultados_generoLivros.values()),  # Converte para uma lista de dicionários
-        'cursos': list(resultados_cursos.values()),
-        'alunos': list(resultados_alunos.values()),
-        'emprestimos': list(resultados_emprestimos.values()),  # Converte para uma lista de dicionários
-        'devolucao': list(resultados_devolucao.values()),
-        'detalhesLivro': list(resultados_detalhesLivro.values())
-    }
 
-    return render(request, 'resultadosPesquisa.html', context)

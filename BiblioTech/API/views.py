@@ -756,30 +756,32 @@ class CursoView(APIView):
     
 
 def pesquisa(request):
-    consulta = request.GET.get('consulta', '')  # Obtém o parâmetro de consulta da requisição
+    consulta = request.GET.get('consulta', '')
 
     # Realize a lógica de pesquisa aqui
     resultados_livros = Livro.objects.filter(titulo__icontains=consulta)
     resultados_autores = Autor.objects.filter(nome__icontains=consulta)
     resultados_editoras = Editora.objects.filter(nome__icontains=consulta)
-    resultados_generoLivros = GeneroLivro.objects.filter(titulo__icontains=consulta)
     resultados_cursos = Curso.objects.filter(nome__icontains=consulta)
     resultados_alunos = Aluno.objects.filter(nome__icontains=consulta)
-    resultados_emprestimos = Emprestimo.objects.filter(titulo__icontains=consulta)
-    resultados_devolucao = Devolucao.objects.filter(nome__icontains=consulta)
-    resultados_detalhesLivro = DetalhesLivro.objects.filter(nome__icontains=consulta)
+    resultados_emprestimos = Emprestimo.objects.filter(nome__icontains=consulta)
 
-    # Combine os resultados conforme necessário
+    # Serialize os resultados
+    livros_serialized = LivroSerializer(resultados_livros, many=True).data
+    autores_serialized = AutorSerializer(resultados_autores, many=True).data
+    editoras_serialized = EditoraSerializer(resultados_editoras, many=True).data
+    cursos_serialized = CursoSerializer(resultados_cursos, many=True).data
+    alunos_serialized = AlunoSerializer(resultados_alunos, many=True).data
+    emprestimos_serialized = EmprestimoSerializer(resultados_emprestimos, many=True).data
+
+    # Combine os resultados
     resultados = {
-        'livros': list(resultados_livros.values()),  # Converte para uma lista de dicionários
-        'autores': list(resultados_autores.values()),
-        'editoras': list(resultados_editoras.values()),
-        'generoLivros': list(resultados_generoLivros.values()),  # Converte para uma lista de dicionários
-        'cursos': list(resultados_cursos.values()),
-        'alunos': list(resultados_alunos.values()),
-        'emprestimos': list(resultados_emprestimos.values()),  # Converte para uma lista de dicionários
-        'devolucao': list(resultados_devolucao.values()),
-        'detalhesLivro': list(resultados_detalhesLivro.values())
+        'livros': livros_serialized,
+        'autores': autores_serialized,
+        'editoras': editoras_serialized,
+        'cursos': cursos_serialized,
+        'alunos': alunos_serialized,
+        'emprestimos': emprestimos_serialized,
     }
 
-    return JsonResponse(resultados, safe=False)
+    return JsonResponse(resultados)

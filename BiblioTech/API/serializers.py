@@ -67,4 +67,9 @@ class DetalhesLivroSerializer(serializers.ModelSerializer):
         model = DetalhesLivro
         fields = '__all__'
 
+class PesquisaSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Pesquisa
+        fields = '__all__'
+
 
