@@ -15,48 +15,47 @@
                         <div id="search-results" class="card-header d-flex align-items-center justify-content-between">
                         </div>
                         <div class="card-body">
-                            {% if resultados %}
-                                {% for modelo, itens in resultados.items %}
-                                    {% if itens %}
-                                        <h3 class="mb-3 ms-3">{{ modelo }}</h3>
-                                        <div class="table-responsive text-center">
-                                            <table class="table table-hover">
-                                                <thead>
+                        {% if resultados %}
+                            {% for modelo, itens in resultados.items %}
+                                {% if itens %}
+                                    <h3 class="mb-3 ms-3">{{ modelo }}</h3>
+                                    <div class="table-responsive text-center">
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    {% for field_name, field_value in itens.0.items %}
+                                                        {% if field_name not in campos_a_excluir %}
+                                                            <th>{{ field_name|title }}</th>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                    <th>Ações</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% for item in itens %}
                                                     <tr>
-                                                        <!-- Coloque aqui os cabeçalhos da tabela -->
-                                                        {% for field_name, field_value in itens.0.items %}
-                                                            {% if field_name not in campos_a_excluir %}
-                                                                <th>{{ field_name|title }}</th>
+                                                        {% for campo, valor in item.items %}
+                                                            {% if campo not in campos_a_excluir %}
+                                                                <td>{{ valor }}</td>
                                                             {% endif %}
                                                         {% endfor %}
-                                                        <th>Ações</th>
+                                                        <td>
+                                                            <a class="btn btn-sm bg-primary text-light" href="http://127.0.0.1:8000/home/{{ modelo }}/{{ item.id }}">
+                                                                <i class="bi bi-pencil-square me-1"></i>
+                                                                Editar
+                                                            </a>
+                                                        </td>
                                                     </tr>
-                                                </thead>
-                                                <tbody>
-                                                    {% for item in itens %}
-                                                        <tr>
-                                                            <!-- Preencha as células da tabela com os dados correspondentes -->
-                                                            {% for campo in ordem_campos[modelo] %}
-                                                                {% if campo not in campos_a_excluir %}
-                                                                    <td>{{ item[campo] }}</td>
-                                                                {% endif %}
-                                                            {% endfor %}
-                                                            <td>
-                                                                <a class="btn btn-sm bg-primary text-light" href="http://127.0.0.1:8000/home/{{ modelo }}/{{ item.id }}">
-                                                                    <i class="bi bi-pencil-square me-1"></i>
-                                                                    Editar
-                                                                </a>
-                                                            </td>
-                                                        </tr>
-                                                    {% endfor %}
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    {% endif %}
-                                {% endfor %}
-                            {% else %}
-                                <p>Nenhum resultado encontrado.</p>
-                            {% endif %}
+                                                {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        {% else %}
+                            <p>Nenhum resultado encontrado.</p>
+                        {% endif %}
+
                         </div>
                     </div>
                     <div class="my-4">
@@ -67,10 +66,11 @@
         </div>
     </div>
 {% endblock %}
+
 <script src="{% static 'js/moment.min.js' %}"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        const elementosData = document.querySelectorAll('.campo'); // Seleciona todos os <td> na classe card-body
+        const elementosData = document.querySelectorAll('.valor'); // Seleciona todos os <td> na classe card-body
         elementosData.forEach(function(elemento) {
             const data = elemento.innerText.trim();
             if (moment(data, 'YYYY-MM-DD', true).isValid()) { // Verifica se o texto é uma data válida

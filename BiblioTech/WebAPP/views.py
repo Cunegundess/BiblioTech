@@ -379,7 +379,7 @@ def search_view(request):
                 itens_filtrados.append(item_filtrado)
             resultados_filtrados[modelo] = itens_filtrados
 
-    return render(request, 'Pages/resultadosPesquisa.html', {'resultados': resultados_filtrados, 'campos_a_excluir': campos_a_excluir, 'modelo_singular': modelo_singular, 'ordem_campos': ordem_campos})
+    return render(request, 'Pages/resultadosPesquisa.html', {'resultados': resultados_filtrados, 'campos_a_excluir': campos_a_excluir, 'ordem_campos': ordem_campos})
 
 
 

@@ -3,7 +3,7 @@
 <div class="row flex-nowrap sideNav">
     <div class="px-sm-2 bg-light">
         <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
-            <a href="/" class="d-flex align-items-center pb-4 mb-md-0 ms-2 me-md-auto text-white text-decoration-none">
+            <a href="{% url 'homePage' %}" class="d-flex align-items-center pb-4 mb-md-0 ms-2 me-md-auto text-white text-decoration-none">
                 <span class="fs-5 d-none d-sm-inline fw-bolder text-primary">BIBLIOTECH</span>
             </a>
 
@@ -65,6 +65,15 @@
     }
 </style>
 
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var links = document.querySelectorAll('.sideNav .nav-link'); // Seus links devem ter as classes '.sideNav' e '.nav-link'
+        for (var i = 0; i < links.length; i++) {
+            if (links[i].href === window.location.href) {
+                links[i].classList.add('active');
+            }
+        }
+    });
+</script>
 
 <script src="{% static 'js/sideNav.js' %}"></script>
-
