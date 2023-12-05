@@ -321,13 +321,13 @@ def editarCurso(request, pk):
         form = CursoForm(request.POST, instance=curso)
         if form.is_valid():
             form.save()
-            return JsonResponse({'mensagem': 'Curso atualizado com sucesso', 'redirect': '/home/cursos/'})
+            return JsonResponse({'mensagem': 'Curso atualizado com sucesso', 'redirect': '/home/cursos'})
         else:
             return JsonResponse({'erro': 'Erro ao atualizar Curso'}, status=400)
         
     elif request.method == 'DELETE':
         curso.delete()
-        return JsonResponse({'mensagem': 'Curso excluído com sucesso', 'redirect': '/home/cursos/'})
+        return JsonResponse({'mensagem': 'Curso excluído com sucesso', 'redirect': '/home/cursos'})
     
     elif request.method == 'PUT':
         # Lê os dados brutos da solicitação
@@ -335,7 +335,7 @@ def editarCurso(request, pk):
         form = CursoForm(data, instance=curso)
         if form.is_valid():
             form.save()
-            return JsonResponse({'mensagem': 'Curso atualizado com sucesso', 'redirect': '/home/cursos/'})
+            return JsonResponse({'mensagem': 'Curso atualizado com sucesso', 'redirect': '/home/cursos'})
         else:
             return JsonResponse({'erro': 'Erro ao atualizar Curso'}, status=400)
         

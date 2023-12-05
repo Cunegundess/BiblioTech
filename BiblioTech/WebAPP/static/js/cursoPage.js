@@ -17,7 +17,7 @@ $(document).ready(function() {
                             <td>${curso.setor}</td>
                             <td>${curso.semestres}</td>
                             <td>
-                                <a class="btn btn-sm bg-primary text-light" href="http://127.0.0.1:8000/home/cursos/${curso.id}">
+                                <a class="btn btn-sm bg-primary text-light" href="http://127.0.0.1:8000/home/curso/${curso.id}">
                                     <i class="bi bi-pencil-square me-1"></i>
                                     Editar
                                 </a>

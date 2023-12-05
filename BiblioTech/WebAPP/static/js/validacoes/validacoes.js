@@ -37,8 +37,10 @@ senhaInput.on('input', function () {
 });
 
 $('#id_contato').inputmask('(99) 99999-9999', { placeholder: ' ' });
+$('#id_telefone').inputmask('(99) 99999-9999', { placeholder: ' ' });
 $('#id_data_emprestimo').inputmask('99/99/9999', { placeholder: ' ' });
 $('#id_data_devolucao').inputmask('99/99/9999', { placeholder: ' ' });
+$('#id_data_nascimento').inputmask('99/99/9999', { placeholder: ' ' });
 // $('#id_isbn').inputmask('999-9-99999-9999-9', {
 //     placeholder: ' ',
 // });

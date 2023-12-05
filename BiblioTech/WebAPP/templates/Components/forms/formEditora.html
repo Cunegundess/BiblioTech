@@ -10,6 +10,7 @@
       </div>
         <div class="modal-body text-start">
         <form id="editoraForm">
+          <div id="error-messages"></div>
           {% csrf_token %}
           {{ form|crispy }}
         </div>

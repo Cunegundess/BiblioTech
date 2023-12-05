@@ -37,6 +37,9 @@ class Curso(models.Model):
     setor = models.CharField(max_length=100)
     semestres = models.PositiveIntegerField()
 
+    def __str__(self):
+        return self.nome
+
 class Aluno(models.Model):
     nome = models.CharField(max_length=100)
     email = models.EmailField(unique=True)
